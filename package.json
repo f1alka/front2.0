@@ -5,8 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
-    "tailwindcss": "npx tailwindcss -v",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "tailwindcss-init": "tailwindcss init",
+    "tailwindcss": "lib/cli.js",
     "dev": "vite",
     "serve": "vite preview"
   },
@@ -27,6 +28,7 @@
     "axios": "^1.7.9",
     "lucide-react": "^0.474.0",
     "moment": "^2.30.1",
+    "process": "^0.11.10",
     "react": "^19.0.0",
     "react-datepicker": "^8.0.0",
     "react-dom": "^19.0.0",
