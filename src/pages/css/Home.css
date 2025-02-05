@@ -1,0 +1,290 @@
+.container {
+  display: flex;
+  min-height: 100vh; /* Добавлена высота для корректного отображения */
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 200px;
+}
+
+/* Карточки */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-height: 100px;
+}
+
+/* Центрируем карточки */
+.slick-slide {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Стили для стрелок */
+.custom-arrow {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.custom-arrow.next {
+  right: -50px;
+}
+
+.custom-arrow.prev {
+  left: -50px;
+}
+
+.custom-arrow:before {
+  content: '→';
+  color: white;
+  font-size: 24px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-arrow.prev:before {
+  content: '←';
+}
+
+/* Показываем точки */
+.slick-dots {
+  bottom: -30px;
+}
+
+/* Стили для личного кабинета */
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #8B0000;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+.profile-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20px;
+  border: 3px solid #FF4500;
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-name {
+  margin: 0;
+  font-size: 24px;
+  color: white;
+}
+
+.profile-details {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+}
+
+.profile-job {
+  margin-bottom: 20px;
+}
+
+.profile-job p {
+  margin: 0;
+  font-size: 18px;
+  color: #555;
+}
+
+.profile-job span {
+  font-weight: bold;
+  color: #8B0000;
+}
+
+.personal-data h2 {
+  font-size: 20px;
+  color: #8B0000;
+  margin-bottom: 10px;
+}
+
+.personal-data ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.personal-data ul li {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.personal-data ul li strong {
+  color: #333;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.profile-button {
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.profile-button:hover {
+  background-color: #e68900;
+}
+
+.location-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: 10px; /* Уменьшаем отступы на 30% */
+  margin: 10px;
+  transform: scale(0.7); /* Уменьшаем на 30% */
+  transform-origin: top center; /* Ориентируем масштабирование сверху */
+}
+
+.location-image {
+  width: 100%;
+  height: 140px; /* Уменьшаем высоту изображения на 30% */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+h3 {
+  margin-top: 10px;
+  font-size: 18px; /* Уменьшаем размер шрифта на 30% */
+  color: #333;
+}
+
+p {
+  font-size: 12px; /* Уменьшаем размер шрифта на 30% */
+  color: #555;
+}
+
+
+.loading-text {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+}
+
+.slick-slide {
+  display: flex;
+  justify-content: center;
+}
+
+.slick-dots li button:before {
+  color: #ff9800 !important;
+}
+
+/* Стили для карточки последнего события */
+.event-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin: 20px 0;
+  max-width: 80%; /* Уменьшаем ширину */
+  text-align: center;
+}
+
+.event-card h2 {
+  font-size: 24px;
+  color: #8B0000;
+  margin-bottom: 15px;
+}
+
+.event-details {
+  padding: 15px;
+  background: #f8f8f8;
+  border-radius: 8px;
+}
+
+.event-details h3 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.event-details p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.event-details p strong {
+  color: #333;
+}
+
+.last-event-card {
+  width: 50%; /* Занимает половину ширины страницы */
+  margin: 20px auto; /* Центрируем по горизонтали */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.last-event-card h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.last-event-card p {
+  font-size: 1.1em;
+  color: #333;
+}
+
+.profile-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.profile-button:hover {
+  background-color: #45a049;
+}

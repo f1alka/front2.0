@@ -1,0 +1,161 @@
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+  }
+  
+  .card {
+    width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-img {
+    width: 100%; /* Полная ширина карточки */
+    height: 60%; /* Фото занимает 60% высоты карточки */
+    object-fit: cover; /* Изображение заполняет область */
+    display: block;
+  }
+  
+  .card-body {
+    padding: 15px;
+    height: 40%; /* Остальная часть карточки */
+  }
+  
+  .card-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .card-discount {
+    font-size: 1em;
+    color: #4caf50;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  
+  .card {
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .card-photo {
+    width: 100%;
+    height: 60%; /* Фотография теперь занимает 60% высоты карточки */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Выравнивание по центру по вертикали */
+  }
+  
+  .card-photo img {
+    width: 100%;  /* Фотография растягивается на всю ширину */
+    height: 100%; /* Фотография растягивается на всю высоту */
+    object-fit: cover; /* Изображение заполняет область без искажения */
+    border-radius: 0; /* Убираем округление для фото */
+  }
+  
+  .card-info {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  .card-info h3 {
+    font-size: 1.2em;
+    margin: 0;
+  }
+  
+  .card-info p {
+    font-size: 1em;
+    color: #666;
+  }
+  
+  .card-info .card-discount {
+    color: #ff5722; /* Скидка будет выделяться красным */
+    font-size: 1.1em;
+    font-weight: bold; /* Сделаем скидку более заметной */
+  }
+
+  
+  .content h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .search-container {
+    margin-top: 20px;
+    text-align: center; /* Выравнивание по центру */
+  }
+  
+  .search-container input {
+    width: 60%; /* Делаем поле поиска более широким */
+    padding: 10px;
+    font-size: 1.2em;
+    border: 2px solid #4caf50; /* Зеленая рамка */
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .search-container input:focus {
+    border-color: #2e7d32; /* Цвет рамки при фокусе */
+  }
+  
+  .search-container input::placeholder {
+    font-size: 1.1em;
+    color: #999;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    padding: 10px 15px;
+    font-size: 1em;
+    background-color: #aa3e3e; /* Зеленый фон */
+    color: white;
+    border: none;
+    border-radius: 50%; /* Круглые кнопки */
+    margin: 0 10px; /* Расстояние между кнопками */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .pagination button:disabled {
+    background-color: #ccc; /* Цвет кнопки, если она отключена */
+    cursor: not-allowed;
+  }
+  
+  .pagination button:hover {
+    background-color: #850e0e; /* Темно-зеленый при наведении */
+    transform: scale(1.1); /* Немного увеличиваем кнопку при наведении */
+  }
+  
+  .pagination button:focus {
+    outline: none;
+  }
+  
+  

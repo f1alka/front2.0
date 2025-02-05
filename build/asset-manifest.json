@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/f1alka/front2.0/static/css/main.28955346.css",
+    "main.js": "/f1alka/front2.0/static/js/main.3c636a29.js",
+    "static/media/back.jpg": "/f1alka/front2.0/static/media/back.68a1160bf943d505e721.jpg",
+    "index.html": "/f1alka/front2.0/index.html",
+    "main.28955346.css.map": "/f1alka/front2.0/static/css/main.28955346.css.map",
+    "main.3c636a29.js.map": "/f1alka/front2.0/static/js/main.3c636a29.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.28955346.css",
+    "static/js/main.3c636a29.js"
+  ]
+}
