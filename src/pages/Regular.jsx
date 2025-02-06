@@ -48,7 +48,7 @@ const Regular = () => {
 
   const fetchPhotoUrl = async (id) => {
     try {
-      const response = await fetch(`http://192.168.1.66:8000/files/resident/${id}/get-photo`);
+      const response = await fetch(`http://192.168.1.66:8000/files/residents/${id}/get-photo`);
       if (!response.ok) throw new Error(`Ошибка: ${response.statusText}`);
 
       const photoData = await response.json();
