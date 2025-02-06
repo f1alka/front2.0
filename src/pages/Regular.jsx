@@ -16,7 +16,7 @@ const Regular = () => {
     const fetchResidents = async () => {
       try {
         console.log(`Fetching data: page=${page}&limit=${limit}`);
-        const response = await fetch(`http://192.168.1.66:8000/residents/get_list_residents?page=${page}&limit=${limit}`);
+        const response = await fetch(`http://192.168.3.176:8000/residents/get_list_residents?page=${page}&limit=${limit}`);
 
         if (!response.ok) throw new Error(`Ошибка: ${response.statusText}`);
 

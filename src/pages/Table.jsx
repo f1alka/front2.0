@@ -35,7 +35,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://192.168.1.66:8000/workdays/get_list_workdays?page=${currentPage}&limit=${itemsPerPage}`);
+        const response = await fetch(`http://172.20.10.2:8000/workdays/get_list_workdays?page=${currentPage}&limit=${itemsPerPage}`);
         const data = await response.json();
 
         // Проверка структуры данных и обновление состояний

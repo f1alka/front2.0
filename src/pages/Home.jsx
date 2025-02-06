@@ -33,7 +33,7 @@ function App() {
 
   useEffect(() => {
     // Получаем данные о последнем событии
-    axios.get('http://192.168.1.66:8000/events/get_latest')
+    axios.get('http://172.20.10.2:8000/events/get_latest')
       .then(response => {
         // Преобразуем полученные данные в читаемую форму
         if (response.data) {

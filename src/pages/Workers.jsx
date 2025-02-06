@@ -14,7 +14,7 @@ const Workers = () => {
   useEffect(() => {
     const fetchEmployers = async () => {
       try {
-        const response = await fetch('http://192.168.1.66:8000/employers/get_list_employers');
+        const response = await fetch('http://192.168.3.176:8000/employers/get_list_employers');
         if (!response.ok) {
           throw new Error(`Ошибка: ${response.statusText}`);
         }

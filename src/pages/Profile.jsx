@@ -23,7 +23,7 @@ const Profile = () => {
       }
 
       try {
-        const response = await fetch('http://192.168.1.66:8000/auth/profile', {
+        const response = await fetch('http://172.20.10.2:8000/auth/profile', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -40,7 +40,7 @@ const Profile = () => {
         setWorkDays(data.work_days);
 
         const userId = data.user.id;
-        const photoUrl = userId ? `http://192.168.1.66:8000/files/employer/${userId}/get-photo` : null;
+        const photoUrl = userId ? `http://172.20.10.2:8000/files/employer/${userId}/get-photo` : null;
 
         if (photoUrl) {
           const photoResponse = await fetch(photoUrl, {
