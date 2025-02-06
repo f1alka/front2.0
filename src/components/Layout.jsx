@@ -7,8 +7,7 @@ const Layout = () => {
     <div className="app-container">
       <Sidebar />
       <div className="main-content">
-        {/* Здесь убираем Header, он больше не рендерится */}
-        <Outlet /> {/* Здесь будут рендериться дочерние страницы */}
+        <Outlet />
       </div>
     </div>
   );

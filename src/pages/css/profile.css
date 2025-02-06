@@ -1,0 +1,112 @@
+/* Стиль для блока описания */
+.description-block {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 0;
+    overflow: hidden;
+    max-height: 0; /* Изначально скрыто */
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  }
+  
+  .description-block.visible {
+    max-height: 300px; /* Максимальная высота для раскрытого блока */
+    padding: 10px;
+  }
+  
+  /* Стиль для заголовка блока */
+  .description-header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px;
+  }
+  
+  /* Стиль для стрелочек */
+  .toggle-icon {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+  }
+  
+  .toggle-icon.open {
+    transform: rotate(45deg);
+  }
+  
+  .toggle-icon.closed {
+    transform: rotate(-45deg);
+  }
+  
+  /* Стиль для контента описания */
+  .description-content {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.6;
+    padding-top: 10px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  }
+  
+  .description-content.open {
+    max-height: 500px; /* Выберите максимальную высоту, чтобы блок разворачивался */
+    opacity: 1;
+  }
+  
+  /* Контейнер для кнопки отображения */
+  .description-toggle {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .description-toggle button {
+    padding: 8px 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .description-toggle button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Контейнер для всего блока описания */
+  .description-container {
+    margin-top: 20px; /* отступ сверху */
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Стиль кнопки для отображения описания */
+  .show-description-button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .show-description-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Пробел между блоками */
+  .space-between-blocks {
+    height: 20px; /* Пустое пространство между блоками */
+  }
+  

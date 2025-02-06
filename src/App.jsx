@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Mixes from './pages/Mixes';
 import Table from './pages/Table';

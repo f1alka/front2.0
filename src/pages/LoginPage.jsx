@@ -78,14 +78,9 @@ const LoginPage = () => {
           required
         />
 
-        <div className="button-container">
-          <button type="submit" disabled={loading} className="login-button">
-            {loading ? 'Загрузка...' : 'Войти'}
-          </button>
-          <button type="button" onClick={() => navigate('/')} className="close-button">
-            Закрыть
-          </button>
-        </div>
+        <button type="submit" disabled={loading} className="login-button">
+          {loading ? 'Загрузка...' : 'Войти'}
+        </button>
       </form>
     </div>
   );

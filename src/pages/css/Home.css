@@ -123,12 +123,12 @@
 
 .profile-job span {
   font-weight: bold;
-  color: #8B0000;
+  color: #861818;
 }
 
 .personal-data h2 {
   font-size: 20px;
-  color: #8B0000;
+  color: #a42020;
   margin-bottom: 10px;
 }
 
@@ -276,7 +276,7 @@ p {
 
 .profile-button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #6c4242;
   color: white;
   border: none;
   border-radius: 5px;
@@ -286,5 +286,5 @@ p {
 }
 
 .profile-button:hover {
-  background-color: #45a049;
+  background-color: #334d3c;
 }

@@ -1,0 +1,209 @@
+/* Стиль для контейнера */
+.container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Хедер */
+.header {
+    width: 100%;
+    background-color: #333;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* Заголовок хедера */
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: white;
+}
+
+/* Кнопка личного кабинета */
+.profile-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.profile-button:hover {
+    background-color: #0056b3;
+}
+
+/* Сетка карточек */
+.restaurants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Увеличена минимальная ширина карточек */
+    gap: 40px; /* Больше пространства между карточками */
+    padding: 20px;
+    width: 100%;
+    justify-items: center; /* Центрируем карточки */
+}
+
+/* Стиль для карточки ресторана */
+.restaurant-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Увеличена тень */
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 350px; /* Увеличена ширина карточки */
+    height: 480px; /* Увеличена высота карточки */
+    text-decoration: none; /* Убираем подчеркивание, если это ссылка */
+}
+
+.restaurant-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для изображения ресторана */
+.restaurant-image {
+    width: 100%;
+    height: 250px; /* Увеличена высота изображения */
+    object-fit: cover;
+}
+
+/* Информация о ресторане */
+.restaurant-info {
+    padding: 15px;
+}
+
+.restaurant-info h2 {
+    margin: 0;
+    font-size: 1.5rem; /* Увеличен размер заголовка */
+}
+
+.restaurant-info p {
+    margin: 5px 0;
+    color: #777;
+}
+
+/* Модальное окно */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Содержимое модального окна */
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    max-width: 900px;
+    width: 80%;
+    border-radius: 10px;
+    position: relative;
+}
+
+/* Изображение в модальном окне */
+.modal-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* Информация о ресторане в модальном окне */
+.modal-info {
+    margin-top: 20px;
+}
+
+.modal-info h2 {
+    font-size: 1.5rem;
+}
+
+.modal-info .address {
+    color: #555;
+}
+
+.modal-info .description {
+    margin-top: 10px;
+    color: #666;
+}
+
+/* Кнопка закрытия модального окна */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Секция с событиями */
+.event-section {
+    margin-top: 20px;
+}
+
+.event-card {
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-card h4 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.event-date {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.event-description {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Стили для кнопок навигации */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Убираем последнее событие в модальном окне */
+.modal-content .event-section .event-card:last-child {
+    display: none;
+}

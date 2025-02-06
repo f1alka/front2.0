@@ -1,94 +1,142 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
-import SearchBar from '../components/SearchBar';
-import './css/card_res.css'; // Стили для карточек
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import './css/home2.css';
 
-const Home = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [restaurantData, setRestaurantData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const limit = 10;
+const restaurantsData = [
+  {
+    id: 1,
+    name: 'НИКОЛЬСКая',
+    address: 'Никольская ул., 19-21/1',
+    description: 'Винтажный проект в стиле listening bar расположился на втором этаже исторического здания с огромными окнами и главной точкой притяжения – музыкальным автоматом 1959 года.',
+    imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
+  },
+  {
+    id: 2,
+    name: 'ПРОСПЕКТ МИРА',
+    address: 'Просп. Мира, 36, стр. 1',
+    description: 'В целом, всю концепцию можно назвать как ретро-футуризм.Авторская кухня в паназиатском стиле, коктейльная карта от special позиций до любой классики, винная карта, китайская чайная карта, вип комнаты, зона индивидуального обслуживания, музыкальные вечера и многое другоЕ.',
+    imageUrl: 'https://images.unsplash.com/photo-1552566626-52f8b828add9',
+  },
+  {
+    id: 3,
+    name: 'Азиатский сад',
+    address: 'ул. Гагарина, д. 15',
+    description: 'Паназиатская кухня в современной интерпретации. Суши, роллы, вок и многое другое в атмосфере восточного сада.',
+    imageUrl: 'https://images.unsplash.com/photo-1552531268-3fe8c3fc8d84',
+  }
+];
+
+function App() {
+  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+  const [eventData, setEventData] = useState(null);
 
   useEffect(() => {
-    const fetchRestaurants = async () => {
-      try {
-        console.log(`Fetching data with limit=${limit}`);
-        const response = await fetch(`http://192.168.1.66:8000/locations/get_locations?limit=${limit}`);
+    // Получаем данные о последнем событии
+    axios.get('http://192.168.1.66:8000/events/get_latest')
+      .then(response => {
+        // Преобразуем полученные данные в читаемую форму
+        if (response.data) {
+          setEventData(response.data); // Последнее событие
+        }
+      })
+      .catch(error => {
+        console.error("Ошибка при получении данных о событиях:", error);
+      });
+  }, []);
 
-        if (!response.ok) throw new Error(`Ошибка: ${response.statusText}`);
-
-        const data = await response.json();
-        console.log('Data received:', data);
-
-        const restaurantsWithPhotos = await Promise.all(
-          data.map(async (restaurant) => {
-            const photoUrl = await fetchPhotoUrl(restaurant.id);
-            return { ...restaurant, photoUrl };
-          })
-        );
-
-        setRestaurantData(restaurantsWithPhotos);
-      } catch (err) {
-        console.error('Error fetching data:', err);
-        setError(`Ошибка запроса: ${err.message}`);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRestaurants();
-  }, [limit]);
-
-  const fetchPhotoUrl = async (id) => {
-    try {
-      const response = await fetch(`http://192.168.1.66:8000/files/location/${id}/get-photo`);
-      if (!response.ok) throw new Error(`Ошибка: ${response.statusText}`);
-
-      const photoData = await response.json();
-      return photoData.status === 'success' && photoData.file_url ? photoData.file_url.url : null;
-    } catch (err) {
-      console.error('Error fetching photo:', err);
-      return null;
-    }
+  const formatDate = (dateStr) => {
+    return new Date(dateStr).toLocaleDateString('ru-RU');
   };
 
-  if (loading) return <p>Загрузка...</p>;
-  if (error) return <p>Ошибка: {error}</p>;
-
   return (
-    <div className="main-content">
-      <Header title="HookahPlace Futura" />
-      <section className="content">
-        <h2>Список ресторанов</h2>
+    <div className="container">
+      {/* Новый хедер */}
+      <div className="header">
+        <h1>HookahPlace Futura</h1>
+        {/* Кнопка перехода в личный кабинет */}
+        <Link to="/profile">
+          <button className="profile-button">
+            Личный кабинет
+          </button>
+        </Link>
+      </div>
 
-        <div className="search-container">
-          <SearchBar onSearch={setSearchTerm} />
+      {/* Сетка карточек ресторанов */}
+      <div className="restaurants-grid">
+        {restaurantsData.map(restaurant => (
+          <div
+            key={restaurant.id}
+            className="restaurant-card"
+            onClick={() => setSelectedRestaurant(restaurant)}
+          >
+            <img
+              src={restaurant.imageUrl}
+              alt={restaurant.name}
+              className="restaurant-image"
+            />
+            <div className="restaurant-info">
+              <h2>{restaurant.name}</h2>
+              <p>{restaurant.address}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Карточка последнего события */}
+      {eventData && (
+        <div className="event-card">
+          <h2>Последнее событие</h2>
+          <div className="event-info">
+            <h3>{eventData.name}</h3>
+            <p>{formatDate(eventData.date_start)}</p>
+            <p>{eventData.description}</p>
+          </div>
         </div>
+      )}
 
-        <div className="card-container">
-          {restaurantData
-            .filter(row => row.name.toLowerCase().includes(searchTerm.toLowerCase()))
-            .map((restaurant, index) => (
-              <div key={index} className="card">
-                <div className="card-photo">
-                  <img 
-                    src={restaurant.photoUrl || 'default-photo-url.jpg'} 
-                    alt={`Фото ${restaurant.name}`} 
-                    className="restaurant-photo" 
-                  />
-                </div>
-                <div className="card-info">
-                  <h3>{restaurant.name}</h3>
-                  <p><strong>Адрес:</strong> {restaurant.address}</p>
-                  <p><strong>Описание:</strong> {restaurant.description}</p>
-                </div>
+      {/* Модальное окно с детальной информацией о ресторане */}
+      {selectedRestaurant && (
+        <div className="modal-overlay" onClick={() => setSelectedRestaurant(null)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <button
+              className="close-button"
+              onClick={() => setSelectedRestaurant(null)}
+            >
+              ×
+            </button>
+
+            <img
+              src={selectedRestaurant.imageUrl}
+              alt={selectedRestaurant.name}
+              className="modal-image"
+            />
+
+            <div className="modal-info">
+              <h2>{selectedRestaurant.name}</h2>
+              <p className="address">{selectedRestaurant.address}</p>
+              <p className="description">{selectedRestaurant.description}</p>
+
+              <div className="event-section">
+                <h3>Последнее событие</h3>
+                {eventData && (
+                  <div className="event-card">
+                    <h4>{eventData.name}</h4>
+                    <p className="event-date">
+                      {formatDate(eventData.date_start)}
+                    </p>
+                    <p className="event-description">
+                      {eventData.description}
+                    </p>
+                  </div>
+                )}
               </div>
-            ))}
+            </div>
+          </div>
         </div>
-      </section>
+      )}
     </div>
   );
-};
+}
 
-export default Home;
+export default App;

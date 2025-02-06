@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import './css/Home.css';
+import './css/table.css';
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -8,7 +9,6 @@ const Profile = () => {
   const [workDays, setWorkDays] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -36,13 +36,10 @@ const Profile = () => {
         }
 
         const data = await response.json();
-        console.log('Data from profile:', data);
         setProfile(data.user);
         setWorkDays(data.work_days);
 
         const userId = data.user.id;
-        console.log('User ID: ', userId);
-
         const photoUrl = userId ? `http://192.168.1.66:8000/files/employer/${userId}/get-photo` : null;
 
         if (photoUrl) {
@@ -53,15 +50,9 @@ const Profile = () => {
 
           if (photoResponse.ok) {
             const photoData = await photoResponse.json();
-            console.log('Photo data:', photoData);
-
             if (photoData.status === 'success' && photoData.file_url) {
               setPhotoUrl(photoData.file_url.url);
-            } else {
-              console.log('Фото не найдено');
             }
-          } else {
-            throw new Error('Ошибка загрузки фото');
           }
         }
       } catch (err) {
@@ -103,45 +94,30 @@ const Profile = () => {
                 <ul>
                   <li><strong>Email:</strong> {profile.email}</li>
                   <li><strong>Контакты:</strong> {profile.contacts?.join(', ') || 'Нет данных'}</li>
+                  {profile.description && (
+                    <li><strong>Описание:</strong> <span style={{ fontWeight: 'bold' }}>{profile.description}</span></li>
+                  )}
                 </ul>
               </div>
             </div>
 
-            {profile.description && (
-              <div className="profile-description">
-                <button 
-                  className="toggle-description"
-                  onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
-                >
-                  {isDescriptionOpen ? 'Скрыть описание' : 'Показать описание'}
-                </button>
-                {isDescriptionOpen && <p className="description-text">{profile.description}</p>}
-              </div>
-            )}
-
-            <div className="workdays-container">
-              <h2>Последние 5 рабочих дней</h2>
-              {workDays.length > 0 ? (
-                <table className="workdays-table">
-                  <thead>
-                    <tr>
-                      <th>Дата</th>
-                      <th>ФИО</th>
-                      <th>Статус</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {workDays.map((day, index) => (
-                      <tr key={index}>
-                        <td>{new Date(day.work_time).toLocaleString()}</td>
-                        <td>{day.employer_fio}</td>
-                        <td>{day.status === 1 ? 'Работал' : 'Отсутствовал'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+            <div className="schedule-container" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+              {workDays.length === 0 ? (
+                <div className="no-data">Нет данных для отображения</div>
               ) : (
-                <p>Нет данных о рабочих днях</p>
+                <div className="employees-list" style={{ display: 'block' }}>
+                  {workDays.map((workday, index) => (
+                    <div key={index} className="employee-card" style={{ marginBottom: '15px' }}>
+                      <div className="card-content">
+                        <h3 className="employee-name">{workday.employer_fio}</h3>
+                        <p className="employee-date">{new Date(workday.work_time).toLocaleDateString()}</p>
+                        <span className={`status-badge ${workday.status === 1 ? 'status-working' : 'status-absent'}`}>
+                          {workday.status === 1 ? 'Работал' : 'Отсутствовал'}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
           </>

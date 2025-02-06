@@ -1,69 +1,60 @@
+/* Контейнер формы — центрирование */
 .login-container {
-    width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .login-form h2 {
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  
-  .login-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  
-  .error {
-    color: red;
-    text-align: center;
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  
-  /* Контейнер для кнопок */
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  .login-button,
-  .close-button {
-    width: 48%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-    font-size: 14px;
-  }
-  
-  .login-button {
-    background-color: darkred;
-  }
-  
-  .close-button {
-    background-color: gray;
-  }
-  
-  .login-button:hover {
-    background-color: red;
-  }
-  
-  .close-button:hover {
-    background-color: darkgray;
-  }
-  
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; /* Увеличил размер */
+  padding: 40px; /* Сделал больше отступов */
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Сама форма */
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Заголовок */
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* Поля ввода */
+.login-form input {
+  width: 100%;
+  padding: 14px; /* Увеличил размер */
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+/* Ошибки */
+.error {
+  color: red;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+/* Кнопка входа */
+.login-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: darkred;
+  color: white;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.login-button:hover {
+  background-color: red;
+}
