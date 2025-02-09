@@ -1,14 +1,5 @@
-/* Стиль для контейнера */
-.container {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+/* 
 
-/* Хедер */
 .header {
     width: 100%;
     background-color: #333;
@@ -18,14 +9,14 @@
     position: relative;
 }
 
-/* Заголовок хедера */
+
 .header h1 {
     margin: 0;
     font-size: 2rem;
     color: white;
 }
 
-/* Кнопка личного кабинета */
+
 .profile-button {
     position: absolute;
     top: 20px;
@@ -44,27 +35,27 @@
     background-color: #0056b3;
 }
 
-/* Сетка карточек */
+
 .restaurants-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Увеличена минимальная ширина карточек */
-    gap: 40px; /* Больше пространства между карточками */
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+    gap: 40px;
     padding: 20px;
     width: 100%;
-    justify-items: center; /* Центрируем карточки */
+    justify-items: center; 
 }
 
-/* Стиль для карточки ресторана */
+
 .restaurant-card {
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Увеличена тень */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
-    width: 350px; /* Увеличена ширина карточки */
-    height: 480px; /* Увеличена высота карточки */
-    text-decoration: none; /* Убираем подчеркивание, если это ссылка */
+    width: 350px; 
+    height: 480px; 
+    text-decoration: none; 
 }
 
 .restaurant-card:hover {
@@ -72,21 +63,21 @@
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Стили для изображения ресторана */
+
 .restaurant-image {
     width: 100%;
-    height: 250px; /* Увеличена высота изображения */
+    height: 250px; 
     object-fit: cover;
 }
 
-/* Информация о ресторане */
+
 .restaurant-info {
     padding: 15px;
 }
 
 .restaurant-info h2 {
     margin: 0;
-    font-size: 1.5rem; /* Увеличен размер заголовка */
+    font-size: 1.5rem; 
 }
 
 .restaurant-info p {
@@ -94,7 +85,7 @@
     color: #000000;
 }
 
-/* Модальное окно */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -107,7 +98,7 @@
     align-items: center;
 }
 
-/* Содержимое модального окна */
+
 .modal-content {
     background-color: white;
     padding: 20px;
@@ -117,14 +108,13 @@
     position: relative;
 }
 
-/* Изображение в модальном окне */
+
 .modal-image {
     width: 100%;
     height: 300px;
     object-fit: cover;
 }
 
-/* Информация о ресторане в модальном окне */
 .modal-info {
     margin-top: 20px;
 }
@@ -142,7 +132,7 @@
     color: #666;
 }
 
-/* Кнопка закрытия модального окна */
+
 .close-button {
     position: absolute;
     top: 10px;
@@ -154,7 +144,6 @@
     cursor: pointer;
 }
 
-/* Секция с событиями */
 .event-section {
     margin-top: 20px;
 }
@@ -181,7 +170,7 @@
     color: #555;
 }
 
-/* Стили для кнопок навигации */
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -203,7 +192,371 @@
     cursor: not-allowed;
 }
 
-/* Убираем последнее событие в модальном окне */
+
 .modal-content .event-section .event-card:last-child {
     display: none;
-}
+}   */
+
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
+  }
+  
+  /* Hero Section */
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .logo-container {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1.5s ease forwards;
+  }
+  
+  .logo {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1.5s ease forwards 0.5s;
+  }
+  
+  /* Restaurant Carousel */
+  .carousel-section {
+    min-height: 100vh;
+    padding: 80px 0;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    overflow: hidden;
+  }
+  
+  .carousel-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .carousel-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0;
+  }
+  
+  .carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease;
+    gap: 0;
+    padding: 60px 0;
+    position: relative;
+    height: 500px;
+  }
+  
+  .restaurant-card {
+    width: 300px;
+    background: #1a1a1a;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    position: absolute;
+    opacity: 0;
+    transform: scale(0.8);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .restaurant-card.prev {
+    transform: translateX(-100%) scale(0.8);
+    opacity: 0.6;
+    z-index: 1;
+  }
+  
+  .restaurant-card.current {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+    z-index: 2;
+    width: 400px;
+    left: 50%;
+  }
+  
+  .restaurant-card.next {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0.6;
+    z-index: 1;
+  }
+  
+  .restaurant-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  .restaurant-card.current .restaurant-image {
+    height: 350px;
+  }
+  
+  .restaurant-info {
+    padding: 20px;
+  }
+  
+  .restaurant-name {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+    z-index: 3;
+  }
+  
+  .carousel-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .carousel-button.prev {
+    left: 20px;
+  }
+  
+  .carousel-button.next {
+    right: 20px;
+  }
+  
+  /* Login Button */
+  .login-button {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #ff4b1f, #ff9068);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(255, 75, 31, 0.3);
+  }
+  
+  .login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 75, 31, 0.4);
+    background: linear-gradient(45deg, #ff5e3a, #ffa183);
+  }
+  
+  .login-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(255, 75, 31, 0.3);
+  }
+  
+  .login-button svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* Modal */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .modal.open {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .modal-content {
+    background: #1a1a1a;
+    max-width: 800px;
+    width: 90%;
+    border-radius: 15px;
+    padding: 30px;
+    position: relative;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .modal-close svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .modal-gallery {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+    position: relative;
+  }
+  
+  .modal-gallery img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  /* Contact Section */
+  .contact-section {
+    min-height: 100vh;
+    padding: 80px 0;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
+  .contact-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .contact-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  
+  .contact-card {
+    background: #1a1a1a;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .contact-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .contact-icon {
+    margin-bottom: 20px;
+  }
+  
+  .contact-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .contact-info {
+    font-size: 1.1rem;
+  }
+  
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .carousel {
+      height: 400px;
+    }
+  
+    .restaurant-card {
+      width: 250px;
+    }
+  
+    .restaurant-card.current {
+      width: 300px;
+    }
+  
+    .restaurant-image {
+      height: 200px;
+    }
+  
+    .restaurant-card.current .restaurant-image {
+      height: 250px;
+    }
+  
+    .carousel-button {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .hero-title {
+      font-size: 2rem;
+      padding: 0 20px;
+    }
+  }
