@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import SearchBar from './SearchBar';
@@ -70,3 +70,6 @@ const Table = () => {
 };
 
 export default Table;
+
+
+*/

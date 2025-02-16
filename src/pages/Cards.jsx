@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Card from '../components/Card';
@@ -63,3 +63,5 @@ const Cards = () => {
 };
 
 export default Cards;
+
+*/

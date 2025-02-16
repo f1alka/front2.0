@@ -9,7 +9,7 @@ import Workers from './pages/Workers';
 import LoginPage from './pages/LoginPage';
 import Profile from './pages/Profile';
 import Layout from './components/Layout';
-import './styles.css';
+
 
 const isAuthenticated = () => !!localStorage.getItem('token');
 

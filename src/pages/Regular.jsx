@@ -111,10 +111,8 @@ export default Regular;
 
 
 import React, { useState } from 'react';
-import Modal from 'react-modal'
 import './css/regular.css'
 
-Modal.setAppElement('#root')
 
 const locations = [
   { 
@@ -149,14 +147,30 @@ const regularCustomers = [
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500',
     favorites: 'Предпочитает пасту карбонара и белое вино'
   },
-  // Add more customers as needed
 ]
+
+function Modal({ isOpen, onClose, children }) {
+  if (!isOpen) return null
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
+        {children}
+      </div>
+    </div>
+  )
+}
 
 function App() {
   const [selectedLocation, setSelectedLocation] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedRegular, setSelectedRegular] = useState(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  const closeModal = () => {
+    setModalIsOpen(false)
+    setSelectedRegular(null)
+  }
 
   if (!selectedLocation) {
     return (
@@ -228,19 +242,14 @@ function App() {
         ))}
       </div>
 
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        className="modal-content"
-        overlayClassName="ReactModal__Overlay"
-      >
+      <Modal isOpen={modalIsOpen} onClose={closeModal}>
         {selectedRegular && (
           <>
             <div className="modal-header">
               <h2>{selectedRegular.name}</h2>
               <button
                 className="close-button"
-                onClick={() => setModalIsOpen(false)}
+                onClick={closeModal}
               >
                 ×
               </button>
@@ -262,3 +271,4 @@ function App() {
 }
 
 export default App
+

@@ -1,115 +1,93 @@
+/* * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+    width: 100%; 
+}
+*/
 #root {
-    max-width: 1280px;
+    width: 100%; /* Растягиваем контейнер на всю ширину */
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
-  }
-  
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
-  }
-  
-  @keyframes logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-      animation: logo-spin infinite 20s linear;
-    }
-  }
-  
-  .card {
-    padding: 2em;
-  }
-  
-  .read-the-docs {
-    color: #888;
-  }
-  
+}
 
-  :root {
+:root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
     color-scheme: dark;
     background-color: #121212;
     color: rgba(255, 255, 255, 0.87);
-  }
-  
-  body {
+}
+
+/*
+body {
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
-  }
-  
-  .location-select {
+    overflow-x: hidden; 
+    width: 100%; 
+}
+*/
+
+/* Стиль для изображений */
+img, .location-image {
+    max-width: 100%;
+    height: auto; /* Поддержание пропорций */
+}
+
+/* Контейнер для выбора локации */
+.location-select {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
     padding: 2rem;
-  }
-  
-  .location-title {
+    width: 100%;
+    overflow: hidden; /* Предотвращает переполнение */
+}
+
+.location-title {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     color: white;
-  }
-  
-  .location-grid {
+}
+
+/* Сетка для карточек локаций */
+.location-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
     width: 100%;
-    max-width: 1200px;
-  }
-  
-  .location-card {
+    max-width: 100%; /* Растягиваем на всю ширину */
+    margin: 0 auto; /* Центрирование сетки */
+}
+
+/* Карточка локации */
+.location-card {
     background-color: #1e1e1e;
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s;
     position: relative;
-    height: 300px;
-  }
-  
-  .location-card:hover {
+    height: 300px; /* Фиксированная высота */
+}
+
+.location-card:hover {
     transform: scale(1.05);
-  }
-  
-  .location-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0.7;
-    transition: opacity 0.3s;
-  }
-  
-  .location-card:hover .location-image {
-    opacity: 0.9;
-  }
-  
-  .location-name {
+}
+
+/* Название локации */
+.location-name {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -120,75 +98,118 @@
     padding: 1rem;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     text-align: center;
-  }
-  
-  .regulars-page {
+}
+
+/* Страница с регулярными событиями */
+.regulars-page {
     padding: 2rem;
     transition: filter 0.3s ease;
-  }
-  
-  .blur-background {
+    width: 100%;
+    overflow: hidden; /* Предотвращает переполнение */
+}
+
+.blur-background {
     filter: blur(5px);
-  }
-  
-  .search-bar {
+}
+
+/* Поисковая строка */
+.search-bar {
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
-  }
-  
-  .search-input {
+    width: 100%;
+    max-width: 100%; /* Растягиваем на всю ширину */
+    margin: 0 auto; /* Центрирование */
+}
+
+.search-input {
     flex: 1;
     padding: 0.5rem;
     border-radius: 5px;
     border: 1px solid #333;
     background-color: #1e1e1e;
     color: white;
-  }
-  
-  .location-filter {
+}
+
+.location-filter {
     padding: 0.5rem;
     border-radius: 5px;
     border: 1px solid #333;
     background-color: #1e1e1e;
     color: white;
-  }
-  
-  .regulars-grid {
+}
+
+/* Сетка для регулярных событий */
+.regulars-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 2rem;
-  }
-  
-  .regular-card {
+    width: 100%;
+    max-width: 100%; /* Растягиваем на всю ширину */
+    margin: 0 auto; /* Центрирование */
+}
+
+/* Карточка регулярного события */
+.regular-card {
     background-color: #1e1e1e;
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s;
-  }
-  
-  .regular-card:hover {
+    height: 300px; /* Фиксированная высота */
+}
+
+.regular-card:hover {
     transform: scale(1.05);
-  }
-  
-  .regular-image {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-  }
-  
-  .regular-info {
+}
+
+/* Информация в карточке */
+.regular-info {
     padding: 1rem;
-  }
-  
-  .regular-name {
+}
+
+.regular-name {
     margin: 0;
     color: white;
     font-size: 1.2rem;
-  }
-  
-  .modal-content {
+}
+
+/* Карточки с ресторанами */
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 100%; /* Растягиваем на всю ширину */
+    margin: 0 auto; /* Центрирование */
+}
+
+.restaurant-card {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+    height: 350px; /* Высота карточки ресторана */
+}
+
+.restaurant-card:hover {
+    transform: scale(1.05);
+}
+
+/* Информация в карточке ресторана */
+.restaurant-info {
+    padding: 1rem;
+}
+
+.restaurant-name {
+    margin: 0;
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* Модальное окно */
+.modal-content {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -201,48 +222,31 @@
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
-  }
-  
-  .modal-header {
+}
+
+.modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-  }
-  
-  .close-button {
+}
+
+.close-button {
     background: none;
     border: none;
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
-  }
-  
-  .modal-image {
+}
+
+.modal-image {
     width: 100%;
     height: 400px;
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 1rem;
-  }
-  
-  .modal-details {
+}
+
+.modal-details {
     margin-top: 1rem;
-  }
-  
-  .ReactModal__Overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.85) !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .ReactModal__Content {
-    outline: none;
-  }
+}
