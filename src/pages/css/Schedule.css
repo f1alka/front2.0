@@ -1,0 +1,180 @@
+.schedule {
+    padding: 2rem;
+    height: 100vh;
+    background-color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .schedule-header {
+    flex-shrink: 0;
+    padding-bottom: 2rem;
+  }
+  
+  .schedule-header h1 {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+  
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    background: #242424;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .filters input,
+  .filters select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #1a1a1a;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+  
+  .filters input:focus,
+  .filters select:focus {
+    outline: none;
+    border-color: #646cff;
+    box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.2);
+  }
+  
+  .filters input::placeholder {
+    color: #666;
+  }
+  
+  .employee-cards {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 1rem;
+  }
+  
+  .employee-card {
+    background: #242424;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .employee-card:hover {
+    transform: translateX(10px);
+  }
+  
+  .employee-info {
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .employee-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #fff;
+  }
+  
+  .employee-info p {
+    margin: 0;
+    color: #999;
+    font-size: 1rem;
+  }
+  
+  /* Стилизация скроллбара */
+  .employee-cards::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .employee-cards::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 4px;
+  }
+  
+  .employee-cards::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+  }
+  
+  .employee-cards::-webkit-scrollbar-thumb:hover {
+    background: #444;
+  }
+  
+  @media (max-width: 1024px) {
+    .employee-info {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .schedule {
+      padding: 1rem;
+    }
+    
+    .filters {
+      grid-template-columns: 1fr;
+    }
+    
+    .schedule-header h1 {
+      font-size: 2rem;
+    }
+    
+    .employee-info {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+
+
+  :root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+  
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+  }
+  
+  #root {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+  
+  .app {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #1a1a1a;
+    color: white;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }

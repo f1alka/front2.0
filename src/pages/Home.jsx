@@ -144,30 +144,31 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Phone, Mail, MapPin, X, LogIn } from 'lucide-react';
-import './css/home2.css'
+import './css/home2.css';
+import logoImage from './9Asset_1_4x.png'; // Убедитесь, что путь правильный
 
 const restaurants = [
   {
     id: 1,
-    name: 'Никольская',
+    name: 'Проспект мира',
     description: 'Уютный ресторан в самом сердце города с изысканной атмосферой и великолепным видом.',
-    mainImage: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+    mainImage: 'https://avatars.mds.yandex.net/get-altay/5102477/2a00000182ac8620894e2f41de3f39498711/XXXL',
     gallery: [
-      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      'https://images.unsplash.com/photo-1554679665-f5537f187268?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      'https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      'https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+      'https://avatars.mds.yandex.net/get-altay/6249106/2a00000181eed318d7c1444c5fae833fcc63/XXXL',
+      'https://avatars.mds.yandex.net/get-altay/5098810/2a00000181eed843d96995da92df3c61b444/XXXL',
+      'https://avatars.mds.yandex.net/get-altay/4961567/2a00000181f7137dc63f2db58aadfecdb2ed/XXXL',
+      'https://avatars.mds.yandex.net/get-altay/4961567/2a00000181eed5230e30243988a76f62dc2d/XXXL'
     ]
   },
   {
     id: 2,
-    name: 'Тверская',
+    name: 'Никольская',
     description: 'Современное пространство с авторской кухней и профессиональным обслуживанием.',
-    mainImage: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+    mainImage: 'https://avatars.mds.yandex.net/get-altay/9284964/2a0000018b6db0735e01d549943ab687da10/XXXL',
     gallery: [
-      'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      'https://images.unsplash.com/photo-1544148103-0773bf10d330?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      'https://images.unsplash.com/photo-1560624052-449f5ddf0c31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+      'https://avatars.mds.yandex.net/get-altay/11383855/2a0000018cb68ea6956475ef8d6390daf820/XXXL',
+      'https://avatars.mds.yandex.net/get-altay/9761215/2a0000018bfb8862ff56093cd7ba73094e28/XXXL',
+      'https://avatars.mds.yandex.net/get-altay/9284964/2a0000018bfb89004a77337501aa549cbd73/XXXL',
       'https://images.unsplash.com/photo-1562524690-3e0e844777e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
     ]
   },
@@ -187,22 +188,20 @@ const restaurants = [
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [selectedRestaurant, setSelectedRestaurant] = useState<typeof restaurants[0] | null>(null);
+  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [currentGalleryImage, setCurrentGalleryImage] = useState(0);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const contactRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef(null);
+  const contactRef = useRef(null);
+  const [animClass, setAnimClass] = useState('animate-up');
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
 
     if (carouselRef.current) observer.observe(carouselRef.current);
     if (contactRef.current) observer.observe(contactRef.current);
@@ -218,14 +217,14 @@ function App() {
     setCurrentSlide((prev) => (prev - 1 + restaurants.length) % restaurants.length);
   };
 
-  const getSlideClassName = (index: number) => {
+  const getSlideClassName = (index) => {
     if (index === currentSlide) return 'restaurant-card current';
     if (index === (currentSlide + 1) % restaurants.length) return 'restaurant-card next';
     if (index === (currentSlide - 1 + restaurants.length) % restaurants.length) return 'restaurant-card prev';
     return 'restaurant-card';
   };
 
-  const openModal = (restaurant: typeof restaurants[0]) => {
+  const openModal = (restaurant) => {
     setSelectedRestaurant(restaurant);
     setCurrentGalleryImage(0);
   };
@@ -254,10 +253,14 @@ function App() {
       </a>
 
       <section className="hero">
-        <div className="logo-container">
-          <img src="/logo.png" alt="HookahPlace Logo" className="logo" />
+        <div className="hero-content">
+          <div className="logo-container">
+            <img src={logoImage} alt="HookahPlace Logo" className="logo" />
+          </div>
+          <h1 className="hero-title">
+            <span className="hookah">Hookah</span> Place <span className="employers">Employers</span>
+          </h1>
         </div>
-        <h1 className="hero-title">HookahPlace Futura Employers</h1>
       </section>
 
       <section className="carousel-section" ref={carouselRef}>
@@ -303,47 +306,44 @@ function App() {
         <div className="contact-container">
           <h2 className="contact-title">Контакты</h2>
           <div className="contact-grid">
-            <div className="contact-card">
-              <div className="contact-icon">
-                <Phone />
-              </div>
-              <div className="contact-info">+7 (999) 123-45-67</div>
+            <div className="contact-item">
+              <Phone />
+              <p>+7 (495) 000-00-00</p>
             </div>
-            <div className="contact-card">
-              <div className="contact-icon">
-                <Mail />
-              </div>
-              <div className="contact-info">info@hookahplace.com</div>
+            <div className="contact-item">
+              <Mail />
+              <p>info@hookahplace.com</p>
             </div>
-            <div className="contact-card">
-              <div className="contact-icon">
-                <MapPin />
-              </div>
-              <div className="contact-info">Москва, ул. Примерная, 123</div>
+            <div className="contact-item">
+              <MapPin />
+              <p>Москва, улица Примерная, д. 1</p>
             </div>
           </div>
         </div>
       </section>
 
       {selectedRestaurant && (
-        <div className={`modal ${selectedRestaurant ? 'open' : ''}`}>
-          <div className="modal-content">
+        <div className="modal" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={closeModal}>
               <X />
             </button>
-            <h2>{selectedRestaurant.name}</h2>
-            <p>{selectedRestaurant.description}</p>
             <div className="modal-gallery">
-              <button className="carousel-button prev" onClick={prevGalleryImage}>
+              <button className="modal-gallery-button prev" onClick={prevGalleryImage}>
                 <ChevronLeft />
               </button>
               <img
                 src={selectedRestaurant.gallery[currentGalleryImage]}
-                alt={`${selectedRestaurant.name} gallery`}
+                alt="gallery"
+                className="modal-gallery-image"
               />
-              <button className="carousel-button next" onClick={nextGalleryImage}>
+              <button className="modal-gallery-button next" onClick={nextGalleryImage}>
                 <ChevronRight />
               </button>
+            </div>
+            <div className="modal-info">
+              <h3>{selectedRestaurant.name}</h3>
+              <p>{selectedRestaurant.description}</p>
             </div>
           </div>
         </div>

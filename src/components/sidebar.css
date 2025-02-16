@@ -1,6 +1,18 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('/public/Inter-Regular.e89cb19.ttf') format('truetype');
+}
+
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 26px;
+}
+
+
 .topbar {
     width: 100%;
-    background-color: rgb(179, 28, 28); /* Красный цвет фона */
+    background-color: rgb(0, 0, 0); /* Красный цвет фона */
     padding: 0;
     display: flex;
     justify-content: space-between; /* Равномерное распределение */
@@ -21,11 +33,16 @@
     text-decoration: none;
     text-align: center;
     padding: 15px 0; /* Отступы сверху и снизу */
-    font-size: 16px;
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
     font-weight: bold; /* Жирный текст */
     transition: background 0.3s, border 0.3s;
     border-right: 1px solid #444; /* Разделение кнопок */
-  }
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
   
   .tab-button:last-child {
     border-right: none; /* У последней кнопки убираем разделитель */
@@ -40,3 +57,48 @@
     padding: 20px;
   }
   
+  .tab-button img.logo-image {
+    width: 40px;  /* Ширина картинки */
+    height: auto;  /* Высота автоматически подстраивается */
+    display: block; /* Чтобы картинка не тянула за собой лишний отступ */
+    margin: 0 auto;
+  }
+
+  .tab-button img.cab-image {
+    width: 30px;  /* Ширина картинки */
+    height: auto;  /* Высота автоматически подстраивается */
+    display: block; /* Чтобы картинка не тянула за собой лишний отступ */
+    margin: 0 auto;
+  }
+  
+  /* Стили для кнопки, которая содержит картинку */
+.tab-button {
+  display: inline-block; /* Чтобы картинка занимала только нужное место */
+  transition: transform 0.6s ease-in-out; /* Плавное возвращение к исходному состоянию */
+}
+
+/* Стили для картинки внутри кнопки */
+.tab-button img {
+  display: block; /* Убирает отступы и делает картинку блочной */
+  max-width: 100%; /* Обеспечивает, что картинка не выйдет за пределы кнопки */
+  height: auto;
+  transition: transform 0.6s ease-in-out; /* Плавное изменение при наведении */
+}
+
+/* Анимация вращения при наведении */
+.tab-button:hover img {
+  animation: rotateAnimation 1.5s ease-in-out 1; /* Запуск анимации при наведении */
+}
+
+/* Ключевая анимация для вращения */
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(0deg); /* Начальное положение */
+  }
+  50% {
+    transform: rotate(180deg); /* Половина вращения */
+  }
+  100% {
+    transform: rotate(360deg); /* Полный оборот */
+  }
+}

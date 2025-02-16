@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+/* import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import SearchBar from '../components/SearchBar';
@@ -107,3 +107,158 @@ const Regular = () => {
 };
 
 export default Regular;
+*/
+
+
+import React, { useState } from 'react';
+import Modal from 'react-modal'
+import './css/regular.css'
+
+Modal.setAppElement('#root')
+
+const locations = [
+  { 
+    id: 1, 
+    name: 'Арбат',
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800'
+  },
+  { 
+    id: 2, 
+    name: 'Проспект мира',
+    image: 'https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?w=800'
+  },
+  { 
+    id: 3, 
+    name: 'Никольская',
+    image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800'
+  }
+]
+
+const regularCustomers = [
+  {
+    id: 1,
+    name: 'Иван Петров',
+    location: 'Арбат',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500',
+    favorites: 'Любит заказывать стейк medium rare и красное вино'
+  },
+  {
+    id: 2,
+    name: 'Мария Иванова',
+    location: 'Проспект мира',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500',
+    favorites: 'Предпочитает пасту карбонара и белое вино'
+  },
+  // Add more customers as needed
+]
+
+function App() {
+  const [selectedLocation, setSelectedLocation] = useState(null)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [selectedRegular, setSelectedRegular] = useState(null)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  if (!selectedLocation) {
+    return (
+      <div className="location-select">
+        <h1 className="location-title">Выберите локацию</h1>
+        <div className="location-grid">
+          {locations.map(location => (
+            <div
+              key={location.id}
+              className="location-card"
+              onClick={() => setSelectedLocation(location.name)}
+            >
+              <div 
+                className="location-image" 
+                style={{ backgroundImage: `url(${location.image})` }}
+              />
+              <h2 className="location-name">{location.name}</h2>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  const filteredRegulars = regularCustomers.filter(regular =>
+    regular.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    (selectedLocation === 'all' || regular.location === selectedLocation)
+  )
+
+  return (
+    <div className={`regulars-page ${modalIsOpen ? 'blur-background' : ''}`}>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Поиск по имени..."
+          className="search-input"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <select
+          className="location-filter"
+          value={selectedLocation}
+          onChange={(e) => setSelectedLocation(e.target.value)}
+        >
+          <option value="all">Все локации</option>
+          {locations.map(location => (
+            <option key={location.id} value={location.name}>
+              {location.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="regulars-grid">
+        {filteredRegulars.map(regular => (
+          <div
+            key={regular.id}
+            className="regular-card"
+            onClick={() => {
+              setSelectedRegular(regular)
+              setModalIsOpen(true)
+            }}
+          >
+            <img src={regular.image} alt={regular.name} className="regular-image" />
+            <div className="regular-info">
+              <h3 className="regular-name">{regular.name}</h3>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        className="modal-content"
+        overlayClassName="ReactModal__Overlay"
+      >
+        {selectedRegular && (
+          <>
+            <div className="modal-header">
+              <h2>{selectedRegular.name}</h2>
+              <button
+                className="close-button"
+                onClick={() => setModalIsOpen(false)}
+              >
+                ×
+              </button>
+            </div>
+            <img
+              src={selectedRegular.image}
+              alt={selectedRegular.name}
+              className="modal-image"
+            />
+            <div className="modal-details">
+              <p><strong>Локация:</strong> {selectedRegular.location}</p>
+              <p><strong>Предпочтения:</strong> {selectedRegular.favorites}</p>
+            </div>
+          </>
+        )}
+      </Modal>
+    </div>
+  )
+}
+
+export default App

@@ -1,3 +1,4 @@
+/*
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import './css/Home.css';
@@ -130,3 +131,96 @@ const Profile = () => {
 };
 
 export default Profile;
+*/
+import React from 'react';
+import './css/profile.css'
+
+function App() {
+  const employeeData = {
+    name: 'Иван Петров',
+    position: 'Старший кальянщик',
+    photo: 'https://sun9-23.userapi.com/impg/pG-hMO4mKKtBsF7p71dimlhpILr4OoSgSDQ5DA/KN_bTdlS_-Y.jpg?size=2560x1706&quality=95&sign=d424de847538d01077c9e48539ecd4d9&type=album',
+    description: 'Лучший кальянщик евер',
+    contacts: [
+      { type: 'Email', value: 'uzbek.petrov@company.com' },
+      { type: 'Телефон', value: '+7 (999) 123-45-67' },
+      { type: 'Skype', value: 'ivan.petrov.dev' }
+    ],
+    schedule: [
+      {
+        date: '2024-03-18',
+        time: '10:00 - 11:30'
+      },
+      {
+        date: '2024-03-18',
+        time: '13:00 - 15:00'
+      },
+      {
+        date: '2024-03-18',
+        time: '16:00 - 17:30'
+      },
+      {
+        date: '2024-03-19',
+        time: '11:00 - 12:30'
+      },
+      {
+        date: '2024-03-19',
+        time: '14:00 - 16:00'
+      }
+    ]
+  }
+
+  return (
+    <div className="profile-container">
+      <div className="profile-header">
+        <img 
+          src={employeeData.photo} 
+          alt={employeeData.name} 
+          className="profile-image"
+        />
+        <div className="profile-info">
+          <h1 className="profile-name">{employeeData.name}</h1>
+          <h2 className="profile-position">{employeeData.position}</h2>
+          
+          <div className="info-card">
+            <h3 className="info-card-title">О сотруднике</h3>
+            <p className="profile-description">{employeeData.description}</p>
+          </div>
+
+          <div className="info-card">
+            <h3 className="info-card-title">Контактная информация</h3>
+            <ul className="profile-contacts">
+              {employeeData.contacts.map((contact, index) => (
+                <li key={index} className="contact-item">
+                  <span className="contact-label">{contact.type}:</span>
+                  <span className="contact-value">{contact.value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <section className="schedule-section">
+        <h2 className="schedule-title">Расписание</h2>
+        <div className="schedule-cards">
+          {employeeData.schedule.map((item, index) => (
+            <div key={index} className="schedule-card">
+              <div className="card-date">
+                {new Date(item.date).toLocaleDateString('ru-RU', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </div>
+              <div className="card-time">{item.time}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  )
+}
+
+export default App

@@ -1,249 +1,193 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+body {
+  font-family: 'Igra Sans', sans-serif;
+}
+
 
 /* Общие стили */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #dedada;
-    height: 100%;
-    overflow-x: hidden;
-    opacity: 0.98;
-  }
-  
-  /* Экран приветствия */
-  .intro-screen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-    background: #000;
-    color: white;
-    flex-direction: column;
-    animation: fadeIn 1s ease-in-out;
-    position: fixed;
-    z-index: 1000;
-  }
-  
-  .intro-screen h1 {
-    font-size: 4rem;
-    color: #FF0000;
-    margin: 0;
-    text-margin: 0;
-    text-transform: uppercase;
-    animation: zoomIn 1.2s ease forwards;
-  }
-  
-  .intro-screen h2 {
-    font-size: 2rem;
-    color: white;
-    margin: 10px 0;
-    animation: fadeIn 1.5s ease forwards;
-  }
-  
-  .intro-screen p {
-    font-size: 1.2rem;
-    color: #aaa;
-    margin-top: 20px;
-    animation: fadeIn 2s ease forwards;
-  }
-  
-  /* Убираем чёрный прямоугольник */
-  .intro-hidden {
-    display: none;
-  }
-  
-  /* Основной сайт */
-  .container {
-    display: flex;
-    width: 100%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Убираем расширение элементов из-за padding */
+}
+
+html, body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden; /* Убираем горизонтальный скролл */
+  display: flex;
+}
+
+/* Основной контейнер */
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  animation: fadeIn 2s ease-in-out 1.5s forwards;
+}
+
+/* Левая боковая панель */
+.sidebar {
+  background-color: #8B0000;
+  width: 50px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: fixed; /* Фиксируем сайдбар слева */
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+/* Основной контент */
+.main-content {
+  flex-grow: 1;
+  background-color: #111;
+  padding: 20px;
+  min-height: 100vh;
+  width: calc(100vw - 50px); /* Учитываем сайдбар */
+  margin-left: 50px; /* Смещаем контент, чтобы сайдбар не перекрывал */
+}
+
+/* Экран приветствия */
+.intro-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background: #000;
+  color: white;
+  flex-direction: column;
+  animation: fadeIn 1s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Скрытие экрана приветствия */
+.intro-hidden {
+  display: none;
+}
+
+/* Кнопка регистрации */
+.register-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #FF4500;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+/* Окно регистрации */
+.registration-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #333;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 1500;
+}
+
+.registration-window input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.registration-window button {
+  width: 100%;
+  padding: 10px;
+  background-color: #8B0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.registration-window button:hover {
+  background-color: #FF4500;
+}
+
+/* Контент */
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Карточки */
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: #222;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card-content h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #8B0000;
+}
+
+.card-content p {
+  margin-bottom: 15px;
+  color: #ddd;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from {
     opacity: 0;
-    animation: fadeIn 2s ease-in-out 1.5s forwards;
   }
-  
-  .sidebar {
-    background-color: #8B0000;
-    width: 50px; /* фиксированная ширина */
-    position: fixed;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    overflow: hidden; /* удаляет лишнее содержимое */
+  to {
+    opacity: 1;
   }
-  
-  .sidebar .tab-button {
-    color: white;
-    text-decoration: none;
-    padding: 15px 0;
-    text-align: center;
-    width: 100%;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    writing-mode: vertical-rl;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
   }
-  
-  .sidebar .tab-button:hover {
-    background-color: #FF4500;
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
-  
-  .main-content {
-    margin-left: 50px;
-    width: calc(100% - 50px);
-    background-color: #f4f4f4;
-    padding: 20px;
-    transition: margin-left 0.3s ease-in-out;
-  }
-  
-  .header {
-    background-color: #8B0000;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Кнопка регистрации */
-  .register-button {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #FF4500;
-    padding: 10px 20px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 2000;
-  }
-  
-  .register-button button {
-    font-size: 16px;
-    color: white;
-    background-color: transparent;
-    border: none;
-  }
-  
-  /* Стиль окна регистрации */
-  .registration-window {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    display: none;
-    z-index: 1500;
-  }
-  
-  .registration-window input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .registration-window button {
-    width: 100%;
-    padding: 10px;
-    background-color: #8B0000;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .registration-window button:hover {
-    background-color: #FF4500;
-  }
-  
-  .registration-window .close-btn {
-    background-color: #8B0000;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  
-  .registration-window .close-btn:hover {
-    background-color: #FF4500;
-  }
-  
-  /* Эффект размытия фона (НЕ используется теперь) */
-  .blurred {
-    filter: blur(5px);
-    pointer-events: none;
-  }
-  
-  .content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .card {
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .card-image {
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .card-content {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-  
-  .card-content h2 {
-    margin-bottom: 10px;
-    font-size: 20px;
-    color: #8B0000;
-  }
-  
-  .card-content p {
-    margin-bottom: 15px;
-    color: #333;
-  }
-  
-  /* Анимации */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  @keyframes zoomIn {
-    from {
-      transform: scale(0.5);
-      opacity: 0;
-    }
-    to {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
+}
