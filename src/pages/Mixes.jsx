@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Dashboard from '../components/Dashboard';
@@ -11,6 +11,23 @@ const AppContainer = styled.div`
   min-height: 100vh;
   background-color: #f5f5f5;
 `;
+
+// src/pages/Mixes.jsx
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const Mixes = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Редирект на LocationSelect
+    navigate('/location-select/home'); // Пример маршрута
+  }, [navigate]);
+
+  return null; // Можно оставить пустым, так как это только редирект.
+};
+
+export default Mixes;
 
 function App() {
   return (
@@ -29,3 +46,5 @@ function App() {
 }
 
 export default App;
+
+*/
