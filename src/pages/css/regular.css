@@ -1,24 +1,3 @@
-/* * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; 
-    width: 100%; 
-}
-*/
-#root {
-    width: 100%; /* Растягиваем контейнер на всю ширину */
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-}
-
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -28,20 +7,12 @@ html, body {
     color: rgba(255, 255, 255, 0.87);
 }
 
-/*
-body {
-    margin: 0;
-    min-width: 320px;
-    min-height: 100vh;
-    overflow-x: hidden; 
-    width: 100%; 
-}
-*/
-
-/* Стиль для изображений */
-img, .location-image {
-    max-width: 100%;
-    height: auto; /* Поддержание пропорций */
+/* Общие стили */
+#root {
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
 }
 
 /* Контейнер для выбора локации */
@@ -52,9 +23,10 @@ img, .location-image {
     min-height: 100vh;
     padding: 2rem;
     width: 100%;
-    overflow: hidden; /* Предотвращает переполнение */
+    overflow: hidden;
 }
 
+/* Заголовок локации */
 .location-title {
     font-size: 2.5rem;
     margin-bottom: 2rem;
@@ -64,11 +36,11 @@ img, .location-image {
 /* Сетка для карточек локаций */
 .location-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     width: 100%;
-    max-width: 100%; /* Растягиваем на всю ширину */
-    margin: 0 auto; /* Центрирование сетки */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Карточка локации */
@@ -79,11 +51,30 @@ img, .location-image {
     cursor: pointer;
     transition: transform 0.2s;
     position: relative;
-    height: 300px; /* Фиксированная высота */
+    height: 300px;
 }
 
+/* Карточка локации при наведении */
 .location-card:hover {
     transform: scale(1.05);
+}
+
+/* Изображение локации */
+.location-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+/* Изображение локации при наведении */
+.location-card:hover .location-image {
+    opacity: 0.9;
 }
 
 /* Название локации */
@@ -105,11 +96,19 @@ img, .location-image {
     padding: 2rem;
     transition: filter 0.3s ease;
     width: 100%;
-    overflow: hidden; /* Предотвращает переполнение */
+    overflow: hidden;
 }
 
+/* Стиль размытия фона, только для фона */
 .blur-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Установка фона с полупрозрачностью */
     filter: blur(5px);
+    z-index: -1; /* Убедитесь, что это не перекрывает другие элементы */
 }
 
 /* Поисковая строка */
@@ -118,10 +117,11 @@ img, .location-image {
     gap: 1rem;
     margin-bottom: 2rem;
     width: 100%;
-    max-width: 100%; /* Растягиваем на всю ширину */
-    margin: 0 auto; /* Центрирование */
+    max-width: 100%;
+    margin: 0 auto;
 }
 
+/* Поле ввода поиска */
 .search-input {
     flex: 1;
     padding: 0.5rem;
@@ -131,12 +131,14 @@ img, .location-image {
     color: white;
 }
 
+/* Фильтры для локаций */
 .location-filter {
     padding: 0.5rem;
     border-radius: 5px;
     border: 1px solid #333;
     background-color: #1e1e1e;
     color: white;
+    min-width: 150px;
 }
 
 /* Сетка для регулярных событий */
@@ -145,8 +147,8 @@ img, .location-image {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 2rem;
     width: 100%;
-    max-width: 100%; /* Растягиваем на всю ширину */
-    margin: 0 auto; /* Центрирование */
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 /* Карточка регулярного события */
@@ -156,11 +158,7 @@ img, .location-image {
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s;
-    height: 300px; /* Фиксированная высота */
-}
-
-.regular-card:hover {
-    transform: scale(1.05);
+    height: 300px;
 }
 
 /* Информация в карточке */
@@ -168,33 +166,31 @@ img, .location-image {
     padding: 1rem;
 }
 
+/* Название регулярного события */
 .regular-name {
     margin: 0;
     color: white;
     font-size: 1.2rem;
 }
 
-/* Карточки с ресторанами */
+/* Сетка для ресторанов */
 .restaurant-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 2rem;
     width: 100%;
-    max-width: 100%; /* Растягиваем на всю ширину */
-    margin: 0 auto; /* Центрирование */
+    max-width: 100%;
+    margin: 0 auto;
 }
 
+/* Карточка ресторана */
 .restaurant-card {
     background-color: #1e1e1e;
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s;
-    height: 350px; /* Высота карточки ресторана */
-}
-
-.restaurant-card:hover {
-    transform: scale(1.05);
+    height: 350px;
 }
 
 /* Информация в карточке ресторана */
@@ -202,6 +198,7 @@ img, .location-image {
     padding: 1rem;
 }
 
+/* Название ресторана */
 .restaurant-name {
     margin: 0;
     color: white;
@@ -209,11 +206,20 @@ img, .location-image {
 }
 
 /* Модальное окно */
-.modal-content {
+.modal-overlay {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
     background-color: #1e1e1e;
     color: white;
     padding: 2rem;
@@ -237,6 +243,11 @@ img, .location-image {
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
+    padding: 0.5rem;
+}
+
+.close-button:hover {
+    opacity: 0.8;
 }
 
 .modal-image {

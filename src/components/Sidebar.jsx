@@ -11,7 +11,7 @@ const Sidebar = () => {
         <Link to="/" className="tab-button">
           <img src={logo} alt="Главная" className="logo-image" />
         </Link>
-        <Link to="/mixes" className="tab-button">Миксы</Link>
+        <Link to="/mixes" className="tab-button">Админ-панель</Link>
         <Link to="/table" className="tab-button">Расписание</Link>
         <Link to="/regular" className="tab-button">Постоянники</Link>
         <Link to="/cards" className="tab-button">Методички</Link>

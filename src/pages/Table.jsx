@@ -385,7 +385,7 @@ export function TableApp() {
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   const locations = [
-    { id: 1, name: 'Арбат', image: '/images/arbat.jpg' },
+    { id: 1, name: 'Арбат', image: './9Asset_1_4x.png' },
     { id: 2, name: 'Проспект мира', image: './prospekt_mira.jpg' },
     { id: 3, name: 'Никольская', image: './nikolskaya.jpg' },
   ];

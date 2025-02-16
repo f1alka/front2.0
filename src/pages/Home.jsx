@@ -323,31 +323,32 @@ function App() {
       </section>
 
       {selectedRestaurant && (
-        <div className="modal" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeModal}>
-              <X />
-            </button>
-            <div className="modal-gallery">
-              <button className="modal-gallery-button prev" onClick={prevGalleryImage}>
-                <ChevronLeft />
-              </button>
-              <img
-                src={selectedRestaurant.gallery[currentGalleryImage]}
-                alt="gallery"
-                className="modal-gallery-image"
-              />
-              <button className="modal-gallery-button next" onClick={nextGalleryImage}>
-                <ChevronRight />
-              </button>
-            </div>
-            <div className="modal-info">
-              <h3>{selectedRestaurant.name}</h3>
-              <p>{selectedRestaurant.description}</p>
-            </div>
-          </div>
-        </div>
-      )}
+  <div className={`modal ${selectedRestaurant ? 'open' : ''}`} onClick={closeModal}>
+    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <button className="modal-close" onClick={closeModal}>
+        <X />
+      </button>
+      <div className="modal-gallery">
+        <button className="modal-gallery-button prev" onClick={prevGalleryImage}>
+          <ChevronLeft />
+        </button>
+        <img
+          src={selectedRestaurant.gallery[currentGalleryImage]}
+          alt="gallery"
+          className="modal-gallery-image"
+        />
+        <button className="modal-gallery-button next" onClick={nextGalleryImage}>
+          <ChevronRight />
+        </button>
+      </div>
+      <div className="modal-info">
+        <h3>{selectedRestaurant.name}</h3>
+        <p>{selectedRestaurant.description}</p>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }

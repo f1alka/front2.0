@@ -113,7 +113,6 @@ export default Regular;
 import React, { useState } from 'react';
 import './css/regular.css'
 
-
 const locations = [
   { 
     id: 1, 
@@ -271,4 +270,3 @@ function App() {
 }
 
 export default App
-
