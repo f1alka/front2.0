@@ -111,162 +111,192 @@ export default Regular;
 
 
 import React, { useState } from 'react';
-import './css/regular.css'
+import './css/regular.css';
+
+const CustomerCard = ({ customer, onClick }) => {
+  return (
+    <div className="customer-card" onClick={onClick}>
+      <div className="customer-image">
+        <img src={customer.image} alt={customer.name} />
+      </div>
+      <h3>{customer.name}</h3>
+    </div>
+  );
+};
+
+const CustomerModal = ({ customer, onClose }) => {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="customer-modal" onClick={e => e.stopPropagation()}>
+        <button className="close-button" onClick={onClose}>×</button>
+        <div className="modal-content">
+          <img src={customer.image} alt={customer.name} />
+          <h2>{customer.name}</h2>
+          <p>{customer.description}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const locations = [
-  { 
-    id: 1, 
+  {
+    id: 1,
     name: 'Арбат',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800'
+    image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24',
+    description: 'Уютное кафе в центре города'
   },
-  { 
-    id: 2, 
+  {
+    id: 2,
     name: 'Проспект мира',
-    image: 'https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?w=800'
+    image: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8',
+    description: 'Современное пространство с панорамными окнами'
   },
-  { 
-    id: 3, 
+  {
+    id: 3,
     name: 'Никольская',
-    image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800'
+    image: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814',
+    description: 'Историческое место с особой атмосферой'
   }
-]
+];
 
-const regularCustomers = [
+const customers = [
   {
     id: 1,
     name: 'Иван Петров',
-    location: 'Арбат',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500',
-    favorites: 'Любит заказывать стейк medium rare и красное вино'
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e',
+    description: 'Любит кофе американо и десерты. Предпочитает сидеть у окна. Часто заказывает чизкейк.',
+    location: 'Арбат'
   },
   {
     id: 2,
     name: 'Мария Иванова',
-    location: 'Проспект мира',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500',
-    favorites: 'Предпочитает пасту карбонара и белое вино'
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330',
+    description: 'Предпочитает зеленый чай и салаты. Всегда берет десерт дня.',
+    location: 'Проспект мира'
   },
-]
-
-function Modal({ isOpen, onClose, children }) {
-  if (!isOpen) return null
-
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
-        {children}
-      </div>
-    </div>
-  )
-}
-
-function App() {
-  const [selectedLocation, setSelectedLocation] = useState(null)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedRegular, setSelectedRegular] = useState(null)
-  const [modalIsOpen, setModalIsOpen] = useState(false)
-
-  const closeModal = () => {
-    setModalIsOpen(false)
-    setSelectedRegular(null)
+  {
+    id: 3,
+    name: 'Алексей Смирнов',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
+    description: 'Любитель крепкого эспрессо. Часто приходит на бизнес-встречи.',
+    location: 'Никольская'
+  },
+  {
+    id: 4,
+    name: 'Екатерина Соколова',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80',
+    description: 'Предпочитает травяные чаи и веганские блюда. Постоянный участник дегустаций.',
+    location: 'Арбат'
+  },
+  {
+    id: 5,
+    name: 'Дмитрий Козлов',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d',
+    description: 'Любит сезонные напитки и фирменные десерты. Всегда заказывает двойную порцию.',
+    location: 'Проспект мира'
   }
+];
 
-  if (!selectedLocation) {
-    return (
-      <div className="location-select">
-        <h1 className="location-title">Выберите локацию</h1>
-        <div className="location-grid">
-          {locations.map(location => (
-            <div
-              key={location.id}
-              className="location-card"
-              onClick={() => setSelectedLocation(location.name)}
-            >
-              <div 
-                className="location-image" 
-                style={{ backgroundImage: `url(${location.image})` }}
-              />
-              <h2 className="location-name">{location.name}</h2>
-            </div>
-          ))}
-        </div>
-      </div>
-    )
-  }
-
-  const filteredRegulars = regularCustomers.filter(regular =>
-    regular.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (selectedLocation === 'all' || regular.location === selectedLocation)
-  )
-
+const LocationModal = ({ onSelectLocation }) => {
   return (
-    <div className={`regulars-page ${modalIsOpen ? 'blur-background' : ''}`}>
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Поиск по имени..."
-          className="search-input"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <select
-          className="location-filter"
-          value={selectedLocation}
-          onChange={(e) => setSelectedLocation(e.target.value)}
-        >
-          <option value="all">Все локации</option>
-          {locations.map(location => (
-            <option key={location.id} value={location.name}>
-              {location.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="regulars-grid">
-        {filteredRegulars.map(regular => (
+    <div className="location-modal">
+      <h1>Выберите локацию</h1>
+      <div className="location-grid">
+        {locations.map((location) => (
           <div
-            key={regular.id}
-            className="regular-card"
-            onClick={() => {
-              setSelectedRegular(regular)
-              setModalIsOpen(true)
-            }}
+            key={location.id}
+            className="location-card"
+            onClick={() => onSelectLocation(location)}
           >
-            <img src={regular.image} alt={regular.name} className="regular-image" />
-            <div className="regular-info">
-              <h3 className="regular-name">{regular.name}</h3>
+            <img src={location.image} alt={location.name} />
+            <div className="location-info">
+              <h2>{location.name}</h2>
+              <p>{location.description}</p>
             </div>
           </div>
         ))}
       </div>
-
-      <Modal isOpen={modalIsOpen} onClose={closeModal}>
-        {selectedRegular && (
-          <>
-            <div className="modal-header">
-              <h2>{selectedRegular.name}</h2>
-              <button
-                className="close-button"
-                onClick={closeModal}
-              >
-                ×
-              </button>
-            </div>
-            <img
-              src={selectedRegular.image}
-              alt={selectedRegular.name}
-              className="modal-image"
-            />
-            <div className="modal-details">
-              <p><strong>Локация:</strong> {selectedRegular.location}</p>
-              <p><strong>Предпочтения:</strong> {selectedRegular.favorites}</p>
-            </div>
-          </>
-        )}
-      </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default App
+const CustomerList = ({ selectedLocation, onBackClick }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+
+  const filteredCustomers = customers.filter(customer => 
+    customer.location === selectedLocation.name &&
+    customer.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="customer-list">
+      <div className="header">
+        <button className="back-button" onClick={onBackClick}>
+          ← Назад к выбору локации
+        </button>
+        <h2>{selectedLocation.name}</h2>
+      </div>
+
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Поиск по имени"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <select>
+          <option value="">{selectedLocation.name}</option>
+        </select>
+      </div>
+
+      <div className="customers-grid">
+        {filteredCustomers.map(customer => (
+          <CustomerCard
+            key={customer.id}
+            customer={customer}
+            onClick={() => setSelectedCustomer(customer)}
+          />
+        ))}
+      </div>
+
+      {selectedCustomer && (
+        <CustomerModal
+          customer={selectedCustomer}
+          onClose={() => setSelectedCustomer(null)}
+        />
+      )}
+    </div>
+  );
+};
+
+const App = () => {
+  const [showLocationModal, setShowLocationModal] = useState(true);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+
+  const handleLocationSelect = (location) => {
+    setSelectedLocation(location);
+    setShowLocationModal(false);
+  };
+
+  const handleBackClick = () => {
+    setShowLocationModal(true);
+    setSelectedLocation(null);
+  };
+
+  return (
+    <div className="app">
+      {showLocationModal ? (
+        <LocationModal onSelectLocation={handleLocationSelect} />
+      ) : (
+        <CustomerList 
+          selectedLocation={selectedLocation} 
+          onBackClick={handleBackClick}
+        />
+      )}
+    </div>
+  );
+};
+
+export default App;

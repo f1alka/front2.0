@@ -1,263 +1,212 @@
-:root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-    color-scheme: dark;
-    background-color: #121212;
-    color: rgba(255, 255, 255, 0.87);
-}
 
-/* Общие стили */
-#root {
-    width: 100%;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-}
-
-/* Контейнер для выбора локации */
-.location-select {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  
+  .app {
     min-height: 100vh;
-    padding: 2rem;
-    width: 100%;
-    overflow: hidden;
-}
-
-/* Заголовок локации */
-.location-title {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    background-color: #1a1a1a;
     color: white;
-}
-
-/* Сетка для карточек локаций */
-.location-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    width: 100%;
+    padding: 20px;
+  }
+  
+  /* Location Modal Styles */
+  .location-modal {
     max-width: 1200px;
     margin: 0 auto;
-}
-
-/* Карточка локации */
-.location-card {
-    background-color: #1e1e1e;
+    padding: 20px;
+  }
+  
+  .location-modal h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+  }
+  
+  .location-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .location-card {
+    position: relative;
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.2s;
-    position: relative;
-    height: 300px;
-}
-
-/* Карточка локации при наведении */
-.location-card:hover {
-    transform: scale(1.05);
-}
-
-/* Изображение локации */
-.location-image {
-    position: absolute;
-    top: 0;
-    left: 0;
+    transition: transform 0.3s ease;
+    background-color: #333;
+  }
+  
+  .location-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .location-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  .location-info {
+    padding: 20px;
+  }
+  
+  .location-info h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+  }
+  
+  .location-info p {
+    margin: 0;
+    color: #ccc;
+    font-size: 1rem;
+  }
+  
+  /* Customer List Styles */
+  .customer-list {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .back-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #333;
+    margin-right: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #444;
+  }
+  
+  .header h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .search-bar {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .search-bar input,
+  .search-bar select {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+  }
+  
+  .search-bar input {
+    flex: 1;
+  }
+  
+  .search-bar select {
+    min-width: 200px;
+  }
+  
+  .customers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Customer Card Styles */
+  .customer-card {
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .customer-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .customer-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .customer-image img {
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0.7;
-    transition: opacity 0.3s;
-}
-
-/* Изображение локации при наведении */
-.location-card:hover .location-image {
-    opacity: 0.9;
-}
-
-/* Название локации */
-.location-name {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    font-size: 1.5rem;
-    color: white;
+    object-fit: cover;
+  }
+  
+  .customer-card h3 {
+    padding: 15px;
     margin: 0;
-    padding: 1rem;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     text-align: center;
-}
-
-/* Страница с регулярными событиями */
-.regulars-page {
-    padding: 2rem;
-    transition: filter 0.3s ease;
-    width: 100%;
-    overflow: hidden;
-}
-
-/* Стиль размытия фона, только для фона */
-.blur-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Установка фона с полупрозрачностью */
-    filter: blur(5px);
-    z-index: -1; /* Убедитесь, что это не перекрывает другие элементы */
-}
-
-/* Поисковая строка */
-.search-bar {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-}
-
-/* Поле ввода поиска */
-.search-input {
-    flex: 1;
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #333;
-    background-color: #1e1e1e;
-    color: white;
-}
-
-/* Фильтры для локаций */
-.location-filter {
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #333;
-    background-color: #1e1e1e;
-    color: white;
-    min-width: 150px;
-}
-
-/* Сетка для регулярных событий */
-.regulars-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 2rem;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-}
-
-/* Карточка регулярного события */
-.regular-card {
-    background-color: #1e1e1e;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s;
-    height: 300px;
-}
-
-/* Информация в карточке */
-.regular-info {
-    padding: 1rem;
-}
-
-/* Название регулярного события */
-.regular-name {
-    margin: 0;
-    color: white;
-    font-size: 1.2rem;
-}
-
-/* Сетка для ресторанов */
-.restaurant-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 2rem;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-}
-
-/* Карточка ресторана */
-.restaurant-card {
-    background-color: #1e1e1e;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s;
-    height: 350px;
-}
-
-/* Информация в карточке ресторана */
-.restaurant-info {
-    padding: 1rem;
-}
-
-/* Название ресторана */
-.restaurant-name {
-    margin: 0;
-    color: white;
-    font-size: 1.2rem;
-}
-
-/* Модальное окно */
-.modal-overlay {
+    font-size: 1.1rem;
+  }
+  
+  /* Customer Modal Styles */
+  .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
-    align-items: center;
     justify-content: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background-color: #1e1e1e;
-    color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    max-width: 600px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
-}
-
-.close-button {
+    z-index: 1000;
+  }
+  
+  .customer-modal {
+    background-color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     background: none;
     border: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: 24px;
     cursor: pointer;
-    padding: 0.5rem;
-}
-
-.close-button:hover {
-    opacity: 0.8;
-}
-
-.modal-image {
-    width: 100%;
-    height: 400px;
+  }
+  
+  .modal-content {
+    text-align: center;
+  }
+  
+  .modal-content img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
     object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-}
-
-.modal-details {
-    margin-top: 1rem;
-}
+    margin-bottom: 20px;
+  }
+  
+  .modal-content h2 {
+    margin-bottom: 15px;
+  }
+  
+  .modal-content p {
+    color: #ccc;
+  }

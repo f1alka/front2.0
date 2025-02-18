@@ -1,202 +1,225 @@
-
 import React, { useState } from 'react';
-import './css/work.css'
+import './css/work.css';
+
+const EmployeeCard = ({ employee, onClick }) => {
+  return (
+    <div className="employee-card" onClick={onClick}>
+      <div className="employee-image">
+        <img src={employee.image} alt={employee.name} />
+      </div>
+      <h3>{employee.name}</h3>
+      <p className="employee-position">{employee.position}</p>
+    </div>
+  );
+};
+
+const EmployeeModal = ({ employee, onClose }) => {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="employee-modal" onClick={e => e.stopPropagation()}>
+        <button className="close-button" onClick={onClose}>×</button>
+        <div className="modal-content">
+          <img src={employee.image} alt={employee.name} />
+          <h2>{employee.name}</h2>
+          <p className="position">{employee.position}</p>
+          <p className="description">{employee.description}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const locations = [
-  { 
-    id: 1, 
+  {
+    id: 1,
     name: 'Арбат',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800'
+    image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24',
+    description: 'Уютное кафе в центре города'
   },
-  { 
-    id: 2, 
+  {
+    id: 2,
     name: 'Проспект мира',
-    image: 'https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?w=800'
+    image: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8',
+    description: 'Современное пространство с панорамными окнами'
   },
-  { 
-    id: 3, 
+  {
+    id: 3,
     name: 'Никольская',
-    image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800'
+    image: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814',
+    description: 'Историческое место с особой атмосферой'
   }
-]
+];
 
-const employeeStatuses = [
-  'Официант',
+const positions = [
+  'Все должности',
   'Бармен',
-  'Повар',
+  'Кальянщик',
+  'Официант',
   'Хостес',
-  'Управляющий'
-]
+  'Управляющий',
+  'Повар'
+];
 
 const employees = [
   {
     id: 1,
-    name: 'Алексей Смирнов',
-    location: 'Арбат',
-    status: 'Официант',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500',
-    experience: '2 года работы',
-    specialization: 'Специализируется на винной карте, отлично знает европейскую кухню'
+    name: 'Иван Петров',
+    position: 'Бармен',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e',
+    description: 'Профессиональный бармен с 5-летним опытом. Специализируется на авторских коктейлях.',
+    location: 'Арбат'
   },
   {
     id: 2,
-    name: 'Елена Козлова',
-    location: 'Проспект мира',
-    status: 'Бармен',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500',
-    experience: '5 лет работы',
-    specialization: 'Эксперт по коктейлям, победитель городского конкурса барменов 2024'
+    name: 'Мария Иванова',
+    position: 'Хостес',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330',
+    description: 'Приветливая и внимательная хостес. Владеет английским и испанским языками.',
+    location: 'Проспект мира'
   },
   {
     id: 3,
-    name: 'Дмитрий Петров',
-    location: 'Никольская',
-    status: 'Повар',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500',
-    experience: '8 лет работы',
-    specialization: 'Шеф-повар, специализация на итальянской кухне'
+    name: 'Алексей Смирнов',
+    position: 'Управляющий',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
+    description: 'Опытный управляющий. Успешно руководит командой из 20 человек.',
+    location: 'Никольская'
   },
-]
+  {
+    id: 4,
+    name: 'Екатерина Соколова',
+    position: 'Официант',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80',
+    description: 'Внимательный и быстрый официант. Любит свою работу и всегда улыбается гостям.',
+    location: 'Арбат'
+  },
+  {
+    id: 5,
+    name: 'Дмитрий Козлов',
+    position: 'Повар',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d',
+    description: 'Шеф-повар с международным опытом. Специализируется на итальянской кухне.',
+    location: 'Проспект мира'
+  },
+  {
+    id: 6,
+    name: 'Анна Морозова',
+    position: 'Кальянщик',
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2',
+    description: 'Опытный кальянщик. Создает уникальные миксы вкусов.',
+    location: 'Никольская'
+  }
+];
 
-function Modal({ isOpen, onClose, children }) {
-  if (!isOpen) return null
-
+const LocationModal = ({ onSelectLocation }) => {
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
-        {children}
+    <div className="location-modal">
+      <h1>Выберите локацию</h1>
+      <div className="location-grid">
+        {locations.map((location) => (
+          <div
+            key={location.id}
+            className="location-card"
+            onClick={() => onSelectLocation(location)}
+          >
+            <img src={location.image} alt={location.name} />
+            <div className="location-info">
+              <h2>{location.name}</h2>
+              <p>{location.description}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-function EmployeesPage() {
-  const [selectedLocation, setSelectedLocation] = useState(null)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedStatus, setSelectedStatus] = useState('all')
-  const [selectedEmployee, setSelectedEmployee] = useState(null)
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+const EmployeeList = ({ selectedLocation, onBackClick }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedPosition, setSelectedPosition] = useState('Все должности');
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-  const closeModal = () => {
-    setModalIsOpen(false)
-    setSelectedEmployee(null)
-  }
-
-  if (!selectedLocation) {
-    return (
-      <div className="location-select">
-        <h1 className="location-title">Выберите локацию</h1>
-        <div className="location-grid">
-          {locations.map(location => (
-            <div
-              key={location.id}
-              className="location-card"
-              onClick={() => setSelectedLocation(location.name)}
-            >
-              <div 
-                className="location-image" 
-                style={{ backgroundImage: `url(${location.image})` }}
-              />
-              <h2 className="location-name">{location.name}</h2>
-            </div>
-          ))}
-        </div>
-      </div>
-    )
-  }
-
-  const filteredEmployees = employees.filter(employee =>
-    employee.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (selectedLocation === 'all' || employee.location === selectedLocation) &&
-    (selectedStatus === 'all' || employee.status === selectedStatus)
-  )
+  const filteredEmployees = employees.filter(employee => {
+    const matchesLocation = employee.location === selectedLocation.name;
+    const matchesSearch = employee.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesPosition = selectedPosition === 'Все должности' || employee.position === selectedPosition;
+    return matchesLocation && matchesSearch && matchesPosition;
+  });
 
   return (
-    <>
-      <div className={`main-content ${modalIsOpen ? 'blur-background' : ''}`}>
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Поиск по имени..."
-            className="search-input"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <select
-            className="location-filter"
-            value={selectedLocation}
-            onChange={(e) => setSelectedLocation(e.target.value)}
-          >
-            <option value="all">Все локации</option>
-            {locations.map(location => (
-              <option key={location.id} value={location.name}>
-                {location.name}
-              </option>
-            ))}
-          </select>
-          <select
-            className="status-filter"
-            value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
-          >
-            <option value="all">Все должности</option>
-            {employeeStatuses.map(status => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="regulars-grid">
-          {filteredEmployees.map(employee => (
-            <div
-              key={employee.id}
-              className="regular-card"
-              onClick={() => {
-                setSelectedEmployee(employee)
-                setModalIsOpen(true)
-              }}
-            >
-              <img src={employee.image} alt={employee.name} className="regular-image" />
-              <div className="regular-info">
-                <h3 className="regular-name">{employee.name}</h3>
-                <p className="employee-status">{employee.status}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className="employee-list">
+      <div className="header">
+        <button className="back-button" onClick={onBackClick}>
+          ← Назад к выбору локации
+        </button>
+        <h2>{selectedLocation.name}</h2>
       </div>
 
-      <Modal isOpen={modalIsOpen} onClose={closeModal}>
-        {selectedEmployee && (
-          <>
-            <div className="modal-header">
-              <h2>{selectedEmployee.name}</h2>
-              <button
-                className="close-button"
-                onClick={closeModal}
-              >
-                ×
-              </button>
-            </div>
-            <img
-              src={selectedEmployee.image}
-              alt={selectedEmployee.name}
-              className="modal-image"
-            />
-            <div className="modal-details">
-              <p><strong>Должность:</strong> {selectedEmployee.status}</p>
-              <p><strong>Локация:</strong> {selectedEmployee.location}</p>
-              <p><strong>Опыт:</strong> {selectedEmployee.experience}</p>
-              <p><strong>Специализация:</strong> {selectedEmployee.specialization}</p>
-            </div>
-          </>
-        )}
-      </Modal>
-    </>
-  )
-}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Поиск по имени"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <select 
+          value={selectedPosition}
+          onChange={(e) => setSelectedPosition(e.target.value)}
+        >
+          {positions.map(position => (
+            <option key={position} value={position}>
+              {position}
+            </option>
+          ))}
+        </select>
+      </div>
 
-export default EmployeesPage
+      <div className="employees-grid">
+        {filteredEmployees.map(employee => (
+          <EmployeeCard
+            key={employee.id}
+            employee={employee}
+            onClick={() => setSelectedEmployee(employee)}
+          />
+        ))}
+      </div>
 
+      {selectedEmployee && (
+        <EmployeeModal
+          employee={selectedEmployee}
+          onClose={() => setSelectedEmployee(null)}
+        />
+      )}
+    </div>
+  );
+};
+
+const App = () => {
+  const [showLocationModal, setShowLocationModal] = useState(true);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+
+  const handleLocationSelect = (location) => {
+    setSelectedLocation(location);
+    setShowLocationModal(false);
+  };
+
+  const handleBackClick = () => {
+    setShowLocationModal(true);
+    setSelectedLocation(null);
+  };
+
+  return (
+    <div className="app">
+      {showLocationModal ? (
+        <LocationModal onSelectLocation={handleLocationSelect} />
+      ) : (
+        <EmployeeList 
+          selectedLocation={selectedLocation} 
+          onBackClick={handleBackClick}
+        />
+      )}
+    </div>
+  );
+};
+
+export default App;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './sidebar.css'; // Подключаем стили
 import logo from './336b74cb5c.png'; // Импортируем картинку
-import cab from './i.webp';
+import cab from './People-512.webp';
 
 const Sidebar = () => {
   return (

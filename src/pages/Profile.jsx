@@ -140,7 +140,7 @@ function App() {
     name: 'Иван Петров',
     position: 'Старший кальянщик',
     photo: 'https://sun9-23.userapi.com/impg/pG-hMO4mKKtBsF7p71dimlhpILr4OoSgSDQ5DA/KN_bTdlS_-Y.jpg?size=2560x1706&quality=95&sign=d424de847538d01077c9e48539ecd4d9&type=album',
-    description: 'Лучший кальянщик евер',
+    description: 'Старший кальянщик, обладающий большим опытом работы в кальянном оборудовании. П',
     contacts: [
       { type: 'Email', value: 'uzbek.petrov@company.com' },
       { type: 'Телефон', value: '+7 (999) 123-45-67' },
