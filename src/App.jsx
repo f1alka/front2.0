@@ -9,7 +9,7 @@ import Workers from './pages/Workers';
 import LoginPage from './pages/LoginPage';
 import Profile from './pages/Profile';
 import Layout from './components/Layout';
-
+import Events from './pages/Events';
 
 const isAuthenticated = () => !!localStorage.getItem('token');
 
@@ -31,6 +31,7 @@ function MainApp() {
           <Route path="/regular" element={<Regular />} />
           <Route path="/cards" element={<Cards />} />
           <Route path="/workers" element={<Workers />} />
+          <Route path="/events" element={<Events />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to={isAuthenticated() ? "/home" : "/login"} replace />} />

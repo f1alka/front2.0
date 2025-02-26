@@ -13,6 +13,7 @@ const Sidebar = () => {
         </Link>
         <Link to="/mixes" className="tab-button">Админ-панель</Link>
         <Link to="/table" className="tab-button">Расписание</Link>
+        <Link to="/events" className="tab-button">Мероприятия</Link>
         <Link to="/regular" className="tab-button">Постоянники</Link>
         <Link to="/cards" className="tab-button">Методички</Link>
         <Link to="/workers" className="tab-button">Работники</Link>

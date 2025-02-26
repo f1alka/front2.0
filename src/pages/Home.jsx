@@ -146,43 +146,43 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Phone, Mail, MapPin, X, LogIn } from 'lucide-react';
 import './css/home2.css';
 import logoImage from './9Asset_1_4x.png'; // Убедитесь, что путь правильный
+import mainImage1 from './nikolskaya.jpg';
+import mainImage2 from './prospekt_mira.jpg';
+import mainImage3 from './strast.jpg';
+import gallery11 from './image/galp1.jpg';
+import gallery12 from './image/galp2.jpg';
+import gallery13 from './image/galp3.jpg';
+import gallery14 from './image/galp4.jpg';
+import gallery21 from './image/galn1.jpg';
+import gallery22 from './image/galn2.jpg';
+import gallery23 from './image/galn3.jpg';
+import gallery24 from './image/galn4.jpg';
+import gallery31 from './image/gals1.JPG';
+import gallery32 from './image/gals2.jpg';
+import gallery33 from './image/gals3.JPG';
+import gallery34 from './image/gals4.jpg';
 
 const restaurants = [
   {
     id: 1,
     name: 'Проспект мира',
     description: 'Уютный ресторан в самом сердце города с изысканной атмосферой и великолепным видом.',
-    mainImage: 'https://avatars.mds.yandex.net/get-altay/5102477/2a00000182ac8620894e2f41de3f39498711/XXXL',
-    gallery: [
-      'https://avatars.mds.yandex.net/get-altay/6249106/2a00000181eed318d7c1444c5fae833fcc63/XXXL',
-      'https://avatars.mds.yandex.net/get-altay/5098810/2a00000181eed843d96995da92df3c61b444/XXXL',
-      'https://avatars.mds.yandex.net/get-altay/4961567/2a00000181f7137dc63f2db58aadfecdb2ed/XXXL',
-      'https://avatars.mds.yandex.net/get-altay/4961567/2a00000181eed5230e30243988a76f62dc2d/XXXL'
-    ]
+    mainImage: mainImage2,
+    gallery: [gallery11,gallery12,gallery13,gallery14]
   },
   {
     id: 2,
     name: 'Никольская',
     description: 'Современное пространство с авторской кухней и профессиональным обслуживанием.',
-    mainImage: 'https://avatars.mds.yandex.net/get-altay/9284964/2a0000018b6db0735e01d549943ab687da10/XXXL',
-    gallery: [
-      'https://avatars.mds.yandex.net/get-altay/11383855/2a0000018cb68ea6956475ef8d6390daf820/XXXL',
-      'https://avatars.mds.yandex.net/get-altay/9761215/2a0000018bfb8862ff56093cd7ba73094e28/XXXL',
-      'https://avatars.mds.yandex.net/get-altay/9284964/2a0000018bfb89004a77337501aa549cbd73/XXXL',
-      'https://images.unsplash.com/photo-1562524690-3e0e844777e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-    ]
+    mainImage: mainImage1,
+    gallery: [gallery21,gallery22,gallery23,gallery24]
   },
   {
     id: 3,
-    name: 'Арбат',
+    name: 'Страстной бульвар',
     description: 'Элегантный ресторан с богатой историей и непревзойденным сервисом.',
-    mainImage: 'https://images.unsplash.com/photo-1515669097368-22e68427d265?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      'https://images.unsplash.com/photo-1544247193-88a1461b3b6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      'https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      'https://images.unsplash.com/photo-1508424757105-b6d5ad9329d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-    ]
+    mainImage: mainImage3,
+    gallery: [gallery31,gallery32,gallery33,gallery34]
   }
 ];
 

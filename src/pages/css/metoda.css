@@ -1,0 +1,233 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .app {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 0;
+  }
+  
+  /* Location Selector Styles */
+  .location-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 40px;
+  }
+  
+  .location-selector h1 {
+    margin-bottom: 60px;
+    font-size: 2.5em;
+    text-align: center;
+  }
+  
+  .locations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    width: 100%;
+    padding: 0 40px;
+  }
+  
+  .location-card {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+    height: 100%;
+  }
+  
+  .location-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .location-card img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+  
+  .location-card h2 {
+    padding: 20px;
+    font-size: 1.5em;
+    text-align: center;
+  }
+  
+  .location-card p {
+    padding: 0 20px 20px;
+    color: #888;
+    text-align: center;
+  }
+  
+  /* Manuals List Styles */
+  .manuals-list {
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px;
+  }
+  
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+    background: #1a1a1a;
+    padding: 25px;
+    border-radius: 8px;
+  }
+  
+  .search-input,
+  .category-filter {
+    background: #2a2a2a;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 1em;
+  }
+  
+  .search-input::placeholder {
+    color: #666;
+  }
+  
+  .back-button {
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 15px 24px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+  
+  .back-button:hover {
+    background-color: #333;
+  }
+  
+  .manuals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  
+  .manual-card {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .manual-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .manual-preview {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .manual-info {
+    padding: 20px;
+  }
+  
+  .manual-info h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+  
+  .manual-category,
+  .manual-location {
+    color: #888;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+  
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .modal-content {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+  }
+  
+  .modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+  }
+  
+  .modal-manual-location,
+  .modal-manual-category {
+    color: #888;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+  }
+  
+  .manual-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin: 20px 0;
+  }
+  
+  .manual-link {
+    display: inline-block;
+    background-color: #2a2a2a;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 4px;
+    margin: 20px 0;
+    transition: background-color 0.2s;
+  }
+  
+  .manual-link:hover {
+    background-color: #333;
+  }
+  
+  .close-button {
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 12px 30px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 20px;
+    font-size: 1.1em;
+  }
+  
+  .close-button:hover {
+    background-color: #333;
+  }

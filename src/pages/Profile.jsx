@@ -132,6 +132,8 @@ const Profile = () => {
 
 export default Profile;
 */
+
+/*
 import React from 'react';
 import './css/profile.css'
 
@@ -224,3 +226,134 @@ function App() {
 }
 
 export default App
+
+*/
+
+import React, { useEffect, useState } from 'react';
+import './css/profile.css';
+
+function App() {
+  const [employeeData, setEmployeeData] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      setLoading(true);
+      setError(null);
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('Нет токена авторизации');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        // Запрос профиля
+        const response = await fetch('http://192.168.1.65:8000/auth/profile', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Ошибка загрузки профиля: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setEmployeeData(data.user);
+
+        // Запрос фото
+        const userId = data.user.id;
+        if (userId) {
+          const photoResponse = await fetch(
+            `http://192.168.1.65:8000/files/employer/${userId}/get-photo`,
+            {
+              method: 'GET',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (photoResponse.ok) {
+            const photoData = await photoResponse.json();
+            if (photoData.status === 'success' && photoData.file_url) {
+              setPhotoUrl(photoData.file_url.url);
+            }
+          }
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
+  if (loading) return <p>Загрузка...</p>;
+  if (error) return <p className="error">{error}</p>;
+
+  return (
+    <div className="profile-container">
+      {employeeData ? (
+        <>
+          <div className="profile-header">
+            <img
+              src={photoUrl || 'https://via.placeholder.com/150'}
+              alt={employeeData.name}
+              className="profile-image"
+            />
+            <div className="profile-info">
+              <h1 className="profile-name">{employeeData.fio}</h1>
+              <h2 className="profile-position">{employeeData.work_type}</h2>
+              <div className="info-card">
+                <h3 className="info-card-title">О сотруднике</h3>
+                <p className="profile-description">{employeeData.description || 'Нет описания'}</p>
+              </div>
+              <div className="info-card">
+                <h3 className="info-card-title">Контактная информация</h3>
+                <ul className="profile-contacts">
+                  <li><strong>Email:</strong> {employeeData.email}</li>
+                  <li><strong>Контакты:</strong> {employeeData.contacts?.join(', ') || 'Нет данных'}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <section className="schedule-section">
+            <h2 className="schedule-title">Расписание</h2>
+            <div className="schedule-cards">
+              {employeeData.work_days && employeeData.work_days.length > 0 ? (
+                employeeData.work_days.map((item, index) => (
+                  <div key={index} className="schedule-card">
+                    <div className="card-date">
+                      {new Date(item.work_time).toLocaleDateString('ru-RU', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </div>
+                    <div className="card-time">{item.work_time}</div>
+                  </div>
+                ))
+              ) : (
+                <p>Нет данных для отображения</p>
+              )}
+            </div>
+          </section>
+        </>
+      ) : (
+        <p>Нет данных</p>
+      )}
+    </div>
+  );
+}
+
+export default App;

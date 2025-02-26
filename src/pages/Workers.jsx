@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './css/work.css';
+import mainImage1 from './nikolskaya.jpg';
+import mainImage2 from './prospekt_mira.jpg';
+import mainImage3 from './strast.jpg'
 
 const EmployeeCard = ({ employee, onClick }) => {
   return (
@@ -32,20 +35,20 @@ const EmployeeModal = ({ employee, onClose }) => {
 const locations = [
   {
     id: 1,
-    name: 'Арбат',
-    image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24',
+    name: 'Страстной бульвар',
+    image: mainImage3,
     description: 'Уютное кафе в центре города'
   },
   {
     id: 2,
     name: 'Проспект мира',
-    image: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8',
+    image: mainImage2,
     description: 'Современное пространство с панорамными окнами'
   },
   {
     id: 3,
     name: 'Никольская',
-    image: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814',
+    image: mainImage1,
     description: 'Историческое место с особой атмосферой'
   }
 ];
