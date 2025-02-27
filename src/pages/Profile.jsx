@@ -252,7 +252,7 @@ function App() {
 
       try {
         // Запрос профиля
-        const response = await fetch('http://192.168.1.65:8000/auth/profile', {
+        const response = await fetch('http://dkvksy0uut.eu.loclx.io/auth/profile', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -271,7 +271,7 @@ function App() {
         const userId = data.user.id;
         if (userId) {
           const photoResponse = await fetch(
-            `http://192.168.1.65:8000/files/employer/${userId}/get-photo`,
+            `http://dkvksy0uut.eu.loclx.io/files/employer/${userId}/get-photo`,
             {
               method: 'GET',
               headers: {
