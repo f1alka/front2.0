@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
 import './css/work.css';
 import mainImage1 from './nikolskaya.jpg';
 import mainImage2 from './prospekt_mira.jpg';
@@ -218,6 +218,245 @@ const App = () => {
       ) : (
         <EmployeeList 
           selectedLocation={selectedLocation} 
+          onBackClick={handleBackClick}
+        />
+      )}
+    </div>
+  );
+};
+
+export default App;
+
+*/
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './css/work.css';
+import mainImage1 from './nikolskaya.jpg';
+import mainImage2 from './prospekt_mira.jpg';
+import mainImage3 from './strast.jpg';
+
+const EmployeeCard = ({ employee, onClick }) => {
+  return (
+    <div className="employee-card" onClick={onClick}>
+      <div className="employee-image">
+        <img src={`http://176.114.90.207:8000/files/employer/${employee.id}/get-photo`} alt={employee.fio} />
+      </div>
+      <h3>{employee.fio}</h3>
+      <p className="employee-position">{employee.work_type}</p>
+    </div>
+  );
+};
+
+const EmployeeModal = ({ employee, onClose }) => {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="employee-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="close-button" onClick={onClose}>×</button>
+        <div className="modal-content">
+          <img src={`/files/employer/${employee.id}/get-photo`} alt={employee.fio} />
+          <h2>{employee.fio}</h2>
+          <p className="position">{employee.work_type}</p>
+          <p className="description">{employee.description}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const locations = [
+  {
+    id: 1,
+    name: 'Страстной бульвар',
+    image: mainImage3,
+    description: 'Уютное кафе в центре города'
+  },
+  {
+    id: 2,
+    name: 'Проспект мира',
+    image: mainImage2,
+    description: 'Современное пространство с панорамными окнами'
+  },
+  {
+    id: 3,
+    name: 'Никольская',
+    image: mainImage1,
+    description: 'Историческое место с особой атмосферой'
+  }
+];
+
+const positions = [
+  'Все должности',
+  'Бармен',
+  'Кальянщик',
+  'Официант',
+  'Хостес',
+  'Управляющий',
+  'Повар'
+];
+
+const LocationModal = ({ onSelectLocation }) => {
+  return (
+    <div className="work-location-modal">
+      <h1>Выберите локацию</h1>
+      <div className="work-location-grid">
+        {locations.map((location) => (
+          <div
+            key={location.id}
+            className="work-location-card"
+            onClick={() => onSelectLocation(location)}
+          >
+            <img src={location.image} alt={location.name} />
+            <div className="work-location-info">
+              <h2>{location.name}</h2>
+              <p>{location.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const EmployeeList = ({ selectedLocation, onBackClick }) => {
+  const [employees, setEmployees] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedPosition, setSelectedPosition] = useState('Все должности');
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 10;
+
+  const fetchEmployees = async (page) => {
+    try {
+      const response = await axios.get(
+        `http://176.114.90.207:8000/employers/get_list_employers/${selectedLocation.id}`,
+        {
+          params: {
+            page,
+            limit,
+          },
+        }
+      );
+      setEmployees(response.data.employees);
+      setTotalPages(response.data.total_pages);
+    } catch (error) {
+      console.error('Ошибка при загрузке сотрудников:', error);
+    }
+  };
+  
+
+  useEffect(() => {
+    fetchEmployees(currentPage);
+  }, [selectedLocation, currentPage]);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  const filteredEmployees = employees.filter((employee) => {
+    const matchesSearch = employee.fio.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesPosition = selectedPosition === 'Все должности' || employee.work_type === selectedPosition;
+    return matchesSearch && matchesPosition;
+  });
+
+  return (
+    <div className="employee-list">
+      <div className="header">
+        <button className="back-button" onClick={onBackClick}>
+          ← Назад к выбору локации
+        </button>
+        <h2>{selectedLocation.name}</h2>
+      </div>
+
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Поиск по имени"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <select
+          value={selectedPosition}
+          onChange={(e) => setSelectedPosition(e.target.value)}
+        >
+          {positions.map((position) => (
+            <option key={position} value={position}>
+              {position}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="employees-grid">
+        {filteredEmployees.map((employee) => (
+          <EmployeeCard
+            key={employee.id}
+            employee={employee}
+            onClick={() => (window.location.href = `/profile/${employee.id}`)}
+          />
+        ))}
+      </div>
+
+      <div className="pagination">
+        <button
+          className="pagination-button"
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+        >
+          ← Предыдущая
+        </button>
+        <span>
+          Страница {currentPage} из {totalPages}
+        </span>
+        <button
+          className="pagination-button"
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+        >
+          Следующая →
+        </button>
+      </div>
+
+      {selectedEmployee && (
+        <EmployeeModal
+          employee={selectedEmployee}
+          onClose={() => setSelectedEmployee(null)}
+        />
+      )}
+    </div>
+  );
+};
+
+const App = () => {
+  const [showLocationModal, setShowLocationModal] = useState(true);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+
+  const handleLocationSelect = (location) => {
+    setSelectedLocation(location);
+    setShowLocationModal(false);
+  };
+
+  const handleBackClick = () => {
+    setShowLocationModal(true);
+    setSelectedLocation(null);
+  };
+
+  return (
+    <div className="app">
+      {showLocationModal ? (
+        <LocationModal onSelectLocation={handleLocationSelect} />
+      ) : (
+        <EmployeeList
+          selectedLocation={selectedLocation}
           onBackClick={handleBackClick}
         />
       )}

@@ -1,4 +1,4 @@
-/* Reset and base styles */
+Reset and base styles */
 * {
   margin: 0;
   padding: 0;
@@ -17,61 +17,56 @@ body {
   padding: 0;
 }
 
-/* Location Selector Styles */
-.location-selector {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100%;
-  padding: 40px;
+.event-location-selector {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.location-selector h1 {
-  margin-bottom: 60px;
-  font-size: 2.5em;
+.event-location-selector h1 {
   text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
 }
 
-.locations-grid {
+.event-location-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  width: 100%;
-  padding: 0 40px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
 }
 
-.location-card {
-  background-color: #1a1a1a;
-  border-radius: 8px;
+.event-location-card {
+  position: relative;
+  border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s;
-  height: 100%;
+  transition: transform 0.3s ease;
+  background-color: #333;
 }
 
-.location-card:hover {
-  transform: translateY(-5px);
+.event-location-card:hover {
+  transform: scale(1.02);
 }
 
-.location-card img {
+.event-location-card img {
   width: 100%;
-  height: 400px;
+  height: 250px;
   object-fit: cover;
-  filter: grayscale(100%);
 }
 
-.location-card h2 {
+.event-location-info {
   padding: 20px;
-  font-size: 1.5em;
-  text-align: center;
 }
 
-.location-card p {
-  padding: 0 20px 20px;
-  color: #888;
-  text-align: center;
+.event-location-info h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+}
+
+.event-location-info p {
+  margin: 0;
+  color: #ccc;
+  font-size: 1rem;
 }
 
 /* Events List Styles */

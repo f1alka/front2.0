@@ -25,7 +25,7 @@
   "description": "",
   "dependencies": {
     "@tailwindcss/vite": "^4.0.3",
-    "axios": "^1.7.9",
+    "axios": "^1.8.1",
     "lucide-react": "^0.474.0",
     "moment": "^2.30.1",
     "process": "^0.11.10",
@@ -61,5 +61,5 @@
     "tailwindcss": "^4.0.3",
     "typescript": "^3.9.10"
   },
-  "proxy": "http://192.168.3.176:8000"
+  "proxy": "http://176.114.90.207:8000"
 }

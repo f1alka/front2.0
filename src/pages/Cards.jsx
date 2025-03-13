@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
+import mainImage1 from './nikolskaya.jpg';
+import mainImage2 from './prospekt_mira.jpg';
+import mainImage3 from './strast.jpg';
 import './css/metoda.css'
 
 function ManualModal({ manual, onClose }) {
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
+    <div className="cards-modal-overlay" onClick={onClose}>
+      <div className="cards-modal-content" onClick={e => e.stopPropagation()}>
         <h2>{manual.title}</h2>
-        <p className="modal-manual-location">Локация: {manual.location}</p>
-        <p className="modal-manual-category">Категория: {manual.category}</p>
-        <img src={manual.image} alt={manual.title} className="manual-image" />
+        <p className="cards-modal-manual-location">Локация: {manual.location}</p>
+        <p className="cards-modal-manual-category">Категория: {manual.category}</p>
+        <img src={manual.image} alt={manual.title} className="cards-manual-image" />
         <a 
           href={manual.link} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="manual-link"
+          className="cards-manual-link"
         >
-          Открыть методичку
+          Скачать методичку
         </a>
-        <button className="close-button" onClick={onClose}>Закрыть</button>
+        <button className="cards-close-button" onClick={onClose}>Закрыть</button>
       </div>
     </div>
   )
@@ -38,42 +41,42 @@ function ManualsList({ manuals, selectedLocation, onBackClick }) {
   })
 
   return (
-    <div className="manuals-list">
-      <div className="filters">
+    <div className="cards-manuals-list">
+      <div className="cards-filters">
         <input
           type="text"
           placeholder="Поиск по названию"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="search-input"
+          className="cards-search-input"
         />
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
-          className="category-filter"
+          className="cards-category-filter"
         >
           <option value="all">Все категории</option>
           {categories.map(category => (
             <option key={category} value={category}>{category}</option>
           ))}
         </select>
-        <button className="back-button" onClick={onBackClick}>
+        <button className="cards-back-button" onClick={onBackClick}>
           ← Назад к выбору локации
         </button>
       </div>
 
-      <div className="manuals-grid">
+      <div className="cards-manuals-grid">
         {filteredManuals.map(manual => (
           <div 
             key={manual.id} 
-            className="manual-card"
+            className="cards-manual-card"
             onClick={() => setSelectedManual(manual)}
           >
-            <img src={manual.image} alt={manual.title} className="manual-preview" />
-            <div className="manual-info">
+            <img src={manual.image} alt={manual.title} className="cards-manual-preview" />
+            <div className="cards-manual-info">
               <h3>{manual.title}</h3>
-              <p className="manual-category">{manual.category}</p>
-              <p className="manual-location">{manual.location}</p>
+              <p className="cards-manual-category">{manual.category}</p>
+              <p className="cards-manual-location">{manual.location}</p>
             </div>
           </div>
         ))}
@@ -91,18 +94,20 @@ function ManualsList({ manuals, selectedLocation, onBackClick }) {
 
 function LocationSelector({ locations, onLocationSelect }) {
   return (
-    <div className="location-selector">
+    <div className="cards-location-selector">
       <h1>Выберите локацию</h1>
-      <div className="locations-grid">
+      <div className="cards-locations-grid">
         {locations.map(location => (
           <div 
             key={location.id} 
-            className="location-card"
+            className="cards-location-card"
             onClick={() => onLocationSelect(location)}
           >
             <img src={location.image} alt={location.name} />
-            <h2>{location.name}</h2>
-            <p>{location.description}</p>
+            <div className="work-location-info">
+              <h2>{location.name}</h2>
+              <p>{location.description}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -113,23 +118,23 @@ function LocationSelector({ locations, onLocationSelect }) {
 const locations = [
   {
     id: 1,
-    name: 'Проспект мира',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
-    description: 'Современное пространство с панорамными видами'
+    name: 'Страстной бульвар',
+    image: mainImage3,
+    description: 'Уютное кафе в центре города'
   },
   {
     id: 2,
-    name: 'Никольская',
-    image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b',
-    description: 'Историческое место с особой атмосферой'
+    name: 'Проспект мира',
+    image: mainImage2,
+    description: 'Современное пространство с панорамными окнами'
   },
   {
     id: 3,
-    name: 'Страстной бульвар',
-    image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de',
-    description: 'Уютное место в центре города'
+    name: 'Никольская',
+    image: mainImage1,
+    description: 'Историческое место с особой атмосферой'
   }
-]
+];
 
 const manuals = [
   {
@@ -181,7 +186,7 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <div className="cards-app">
       {showLocationSelector ? (
         <LocationSelector 
           locations={locations} 

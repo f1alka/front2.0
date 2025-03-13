@@ -141,7 +141,6 @@
 
 // export default App;
 
-
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Phone, Mail, MapPin, X, LogIn } from 'lucide-react';
 import './css/home2.css';
@@ -180,7 +179,7 @@ const restaurants = [
   {
     id: 3,
     name: 'Страстной бульвар',
-    description: 'Элегантный ресторан с богатой историей и непревзойденным сервисом.',
+    description: 'Третий проект HookahPlace Futura:Альтернативное видение театральности, собранное в историческом здании. Мы отнеслись к полученному пространству с глубоким уважением, подчёркивая достоинства и сохраняя основу, как временной портрет. Функциональное наполнение несёт в себе сплетение современных иммерсивных решений с ретро-футуристичным отличием форм.Самый дорогой проект сети HookahPlace в России уже скоро.',
     mainImage: mainImage3,
     gallery: [gallery31,gallery32,gallery33,gallery34]
   }
@@ -247,10 +246,6 @@ function App() {
 
   return (
     <div>
-      <a href="/login" className="login-button">
-        <LogIn />
-        Личный кабинет
-      </a>
 
       <section className="hero">
         <div className="hero-content">

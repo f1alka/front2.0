@@ -279,18 +279,20 @@ function EventsList({ events, selectedLocation, selectedDate, onDateChange, onBa
 
 function LocationSelector({ locations, onLocationSelect }) {
   return (
-    <div className="location-selector">
+    <div className="event-location-selector">
       <h1>Выберите локацию</h1>
-      <div className="locations-grid">
+      <div className="event-locations-grid">
         {locations.map(location => (
           <div 
             key={location.id} 
-            className="location-card"
+            className="event-location-card"
             onClick={() => onLocationSelect(location)}
           >
             <img src={location.image} alt={location.name} />
-            <h2>{location.name}</h2>
-            <p>{location.description}</p>
+            <div className="event-location-info">
+              <h2>{location.name}</h2>
+              <p>{location.description}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -348,7 +350,7 @@ function App() {
     if (selectedLocation) {
       const fetchEvents = async () => {
         try {
-          const response = await fetch(`http://192.168.1.65:8000/events/get_events/${selectedLocation.name}?page=${currentPage}&limit=${limit}`);
+          const response = await fetch('http://176.114.90.207:8000/events/get_events/${selectedLocation.name}?page=${currentPage}&limit=${limit}');
           const data = await response.json();
           setEvents(data.events);
           setTotalPages(data.total_pages);  // Предполагаем, что сервер возвращает общее количество страниц

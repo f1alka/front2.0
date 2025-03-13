@@ -5,20 +5,9 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  font-size: 26px;
+  font-size: 20px;
 }
 
-.topbar {
-  width: 100%;
-  background-color: rgb(0, 0, 0); /* Черный фон */
-  padding: 0;
-  display: flex;
-  justify-content: space-between; /* Равномерное распределение */
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-}
 
 .nav-menu {
   display: flex;
@@ -51,9 +40,9 @@ body {
 }
 
 .main-content {
-  margin-top: 50px; /* Отступ, чтобы контент не прилипал к меню */
-  padding: 20px;
+  margin-top: 54px; /* Учитываем высоту topbar + градиент */
 }
+
 
 .tab-button img.logo-image {
   width: 40px;  /* Ширина картинки для лого */
@@ -83,4 +72,17 @@ body {
   100% {
     transform: rotate(360deg); /* Полный оборот */
   }
+}
+
+
+
+
+
+.gradient-strip {
+  position: absolute; /* Абсолютное позиционирование */
+  top: 70px; /* Размещаем полоску вверху */
+  left: 0;
+  width: 100%; /* Полоска на всю ширину */
+  height: 8px; /* Толщина полоски */
+  background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Градиент */
 }

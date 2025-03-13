@@ -24,7 +24,7 @@ const LoginPage = () => {
       formData.append('username', username);
       formData.append('password', password);
 
-      const response = await fetch('http://dkvksy0uut.eu.loclx.io/auth/token', {
+      const response = await fetch('http://176.114.90.207:8000/auth/token', { 
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData,

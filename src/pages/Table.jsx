@@ -206,7 +206,11 @@ export default App;
 
 import React, { useState } from 'react';
 import './css/LocationSelect.css';
-import './css/Schedule.css';
+import './css/Schedule.css';// Убедитесь, что путь правильный\
+import './css/table.css';
+import mainImage1 from './nikolskaya.jpg';
+import mainImage2 from './prospekt_mira.jpg';
+import mainImage3 from './strast.jpg';
 
 // Компонент Table
 
@@ -214,17 +218,20 @@ import './css/Schedule.css';
 // Компонент LocationSelect
 export function LocationSelect({ locations, onSelect }) {
   return (
-    <div className="location-select">
+    <div className="table-location-select">
       <h1>Выберите локацию</h1>
-      <div className="location-cards">
+      <div className="table-location-cards">
         {locations.map((location) => (
           <div
             key={location.id}
-            className="location-card"
+            className="table-location-card"
             onClick={() => onSelect(location)}
           >
             <img src={location.image} alt={location.name} />
-            <h2>{location.name}</h2>
+            <div className="table-location-info">
+              <h2>{location.name}</h2>
+              <p>{location.description}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -385,6 +392,130 @@ export function TableApp() {
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   const locations = [
+    { id: 1, name: 'Страстной бульвар', image: mainImage3, description: 'Уютное кафе в центре города' },
+    { id: 2, name: 'Проспект мира', image: mainImage2, description: 'Современное пространство с панорамными окнами' },
+    { id: 3, name: 'Никольская', image: mainImage1, description: 'Историческое место с особой атмосферой' }
+  ];
+
+  return (
+    <div className="app">
+      {!selectedLocation ? (
+        <LocationSelect locations={locations} onSelect={setSelectedLocation} />
+      ) : (
+        <Schedule location={selectedLocation} />
+      )}
+    </div>
+  );
+}
+
+
+
+/*
+import React, { useState, useEffect } from 'react';
+import './css/LocationSelect.css';
+import './css/Schedule.css';
+
+// Компонент LocationSelect
+export function LocationSelect({ locations, onSelect }) {
+  return (
+    <div className="location-select">
+      <h1>Выберите локацию</h1>
+      <div className="location-cards">
+        {locations.map((location) => (
+          <div
+            key={location.id}
+            className="location-card"
+            onClick={() => onSelect(location)}
+          >
+            <img src={location.image} alt={location.name} />
+            <h2>{location.name}</h2>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Компонент Schedule
+export function Schedule({ location }) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [workdays, setWorkdays] = useState([]);
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10); // Добавлен лимит на количество элементов на страницу
+  const [hasMore, setHasMore] = useState(true);
+
+  const fetchWorkdays = async (pageNumber) => {
+    try {
+      const response = await fetch(`http://kbnvydpy07.eu.loclx.io/workdays/${location.name}/get_list_workdays?page=${pageNumber}&limit=${limit}`);
+      if (!response.ok) throw new Error('Ошибка загрузки данных');
+      const data = await response.json();
+      setWorkdays((prevWorkdays) => [...prevWorkdays, ...data.items]);
+      setHasMore(data.items.length > 0);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchWorkdays(page);
+  }, [page, location]);
+
+  const filteredWorkdays = workdays.filter((workday) => {
+    const matchesSearch = workday.employer_fio.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesDate = !selectedDate || new Date(workday.work_time).toISOString().split('T')[0] === selectedDate;
+    return matchesSearch && matchesDate;
+  });
+
+  const loadMore = () => {
+    if (hasMore) setPage((prevPage) => prevPage + 1);
+  };
+
+  return (
+    <div className="schedule">
+      <div className="schedule-header">
+        <h1>Расписание сотрудников</h1>
+        <div className="filters">
+          <input
+            type="text"
+            placeholder="Поиск по имени"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <input
+            type="date"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="employee-cards">
+        {filteredWorkdays.map((workday) => (
+          <div key={workday.id} className="employee-card">
+            <div className="employee-info">
+              <h3>{workday.employer_fio}</h3>
+              <p>{new Date(workday.work_time).toLocaleString()}</p>
+              <p>{workday.location_name}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {hasMore && (
+        <button className="load-more" onClick={loadMore}>
+          Загрузить ещё
+        </button>
+      )}
+    </div>
+  );
+}
+
+// Главный компонент TableApp
+export function TableApp() {
+  const [selectedLocation, setSelectedLocation] = useState(null);
+
+  const locations = [
     { id: 1, name: 'Арбат', image: './9Asset_1_4x.png' },
     { id: 2, name: 'Проспект мира', image: './prospekt_mira.jpg' },
     { id: 3, name: 'Никольская', image: './nikolskaya.jpg' },
@@ -400,3 +531,5 @@ export function TableApp() {
     </div>
   );
 }
+
+*/
